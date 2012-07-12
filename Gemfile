@@ -5,6 +5,7 @@ gem 'bio'
 
 # Deployment
 gem 'capistrano'
+gem 'rvm-capistrano'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
