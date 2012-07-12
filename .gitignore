@@ -13,3 +13,16 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore temporary files
+*~
+.*.sw?
+*.dia.autosave
+\#.*\#
+
+# Ignore database settings file
+/config/database.yml
+
+# Ignore deployment settings file
+/config/deploy.rb
+
