@@ -5,21 +5,15 @@
     <th>Protein gi</th>
     <th>Taxon</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @protein_gi_taxons.each do |protein_gi_taxon| %>
   <tr>
     <td><%= protein_gi_taxon.protein_gi %></td>
-    <td><%= protein_gi_taxon.taxon_id %></td>
+    <td><%= link_to protein_gi_taxon.taxon_with_name.scientific_name, protein_gi_taxon.taxon_with_name %></td>
     <td><%= link_to 'Show', protein_gi_taxon %></td>
-    <td><%= link_to 'Edit', edit_protein_gi_taxon_path(protein_gi_taxon) %></td>
-    <td><%= link_to 'Destroy', protein_gi_taxon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Protein gi taxon', new_protein_gi_taxon_path %>

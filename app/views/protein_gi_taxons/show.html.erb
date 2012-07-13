@@ -7,9 +7,7 @@
 
 <p>
   <b>Taxon:</b>
-  <%= @protein_gi_taxon.taxon_id %>
+  <%= link_to @protein_gi_taxon.taxon_with_name.scientific_name, @protein_gi_taxon.taxon_with_name %>
 </p>
 
-
-<%= link_to 'Edit', edit_protein_gi_taxon_path(@protein_gi_taxon) %> |
 <%= link_to 'Back', protein_gi_taxons_path %>

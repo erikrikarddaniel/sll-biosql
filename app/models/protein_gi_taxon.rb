@@ -9,4 +9,6 @@
 class ProteinGiTaxon < ActiveRecord::Base
   attr_accessible :protein_gi, :taxon_id
   set_primary_key :protein_gi
+
+  belongs_to :taxon_with_name, :foreign_key => :taxon_id
 end
