@@ -1,5 +1,5 @@
 sessionname sll-biosql
-screen -t sll-biosql
+screen -t root
 screen -t server
 screen -t autotest
 chdir db

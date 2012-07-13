@@ -12,6 +12,21 @@ gem 'rvm-capistrano'
 
 gem 'pg'
 
+group :development, :test do
+	gem 'rspec-rails', '2.8.1'
+	gem 'annotate', '~> 2.4.1.beta'
+end
+
+group :test do
+  gem 'capybara', '1.1.2'
+  gem 'factory_girl_rails', '1.4.0'
+  gem 'autotest-standalone', :require => 'autotest'
+  gem 'autotest-rails-pure'
+  gem 'term-ansicolor'
+  gem 'launchy'
+  gem 'rspec-html-matchers'
+end
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

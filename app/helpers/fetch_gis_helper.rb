@@ -1,0 +1,2 @@
+module FetchGisHelper
+end

@@ -1,0 +1,23 @@
+<h1>Listing fetch_gis</h1>
+
+<table>
+  <tr>
+    <th>Gi</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @fetch_gis.each do |fetch_gi| %>
+  <tr>
+    <td><%= fetch_gi.gi %></td>
+    <td><%= link_to 'Show', fetch_gi %></td>
+    <td><%= link_to 'Edit', edit_fetch_gi_path(fetch_gi) %></td>
+    <td><%= link_to 'Destroy', fetch_gi, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Fetch gi', new_fetch_gi_path %>

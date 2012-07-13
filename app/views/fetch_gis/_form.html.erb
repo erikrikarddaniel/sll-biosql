@@ -1,0 +1,21 @@
+<%= form_for(@fetch_gi) do |f| %>
+  <% if @fetch_gi.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fetch_gi.errors.count, "error") %> prohibited this fetch_gi from being saved:</h2>
+
+      <ul>
+      <% @fetch_gi.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :gi %><br />
+    <%= f.number_field :gi %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
