@@ -4,7 +4,7 @@
 #
 # daniel.lundin@scilifelab.se
 
-TABLE=protein_gi_to_taxids
+TABLE=protein_gi_taxons
 
 usage() {
   echo "`basename $0`: Loads the protein_gi_to_taxids table in a PostgreSQL database with data from a gzipped NCBI dump file."
@@ -37,4 +37,4 @@ echo "Truncating $TABLE"
 psql -d $db -U $dbuser -c "TRUNCATE TABLE $TABLE"
 
 echo "Inserting rows from $dumpfile"
-gunzip -c $dumpfile | psql -d $db -U $dbuser -c "COPY $TABLE(gi,taxid) FROM STDIN;"
+gunzip -c $dumpfile | psql -d $db -U $dbuser -c "COPY $TABLE(protein_gi,taxon_id) FROM STDIN;"
