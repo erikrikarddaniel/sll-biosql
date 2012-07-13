@@ -1,7 +1,11 @@
 SllBiosql::Application.routes.draw do
+  resources :protein_gi_taxons
+  resources :fetch_gis
+  resources :sequenced_genomes
+  resources :taxon_with_names
+
   root to: "static_pages#home"
 
-  resources :fetch_gis
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

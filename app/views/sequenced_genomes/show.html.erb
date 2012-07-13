@@ -1,0 +1,10 @@
+<p id='notice'><%= notice %></p>
+
+<p>
+  <b>NCBI taxon id:</b>
+  <%= @sequenced_genome.ncbi_taxon_id %>
+  <b>wgs:</b>
+  <%= @sequenced_genome.wgs %>
+</p>
+
+<%= link_to 'Back', sequenced_genomes_path %>

@@ -1,0 +1,2 @@
+module ProteinGiTaxonsHelper
+end

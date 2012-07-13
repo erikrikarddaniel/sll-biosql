@@ -1,0 +1,24 @@
+<h1>Listing taxa with scientific names</h1>
+
+<table>
+  <tr>
+    <th>Taxon id</th>
+    <th>NCBI taxon_id</th>
+    <th>Scientific name</th>
+    <th>Rank</th>
+    <th>Parent</th>
+    <th>WGS?</th>
+    <th></th>
+  </tr>
+
+<% @taxon_with_names.each do |taxon| %>
+  <tr>
+    <td><%= taxon.taxon_id %></td>
+    <td><%= taxon.ncbi_taxon_id %></td>
+    <td><%= taxon.scientific_name %></td>
+    <td><%= taxon.node_rank %></td>
+    <td><%= link_to taxon.parent.scientific_name, taxon.parent %></td>
+    <td><%= taxon.wgs %></td>
+    <td><%= link_to 'Show', taxon %></td>
+<% end %>
+</table>

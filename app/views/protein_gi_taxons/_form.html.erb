@@ -1,0 +1,25 @@
+<%= form_for(@protein_gi_taxon) do |f| %>
+  <% if @protein_gi_taxon.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@protein_gi_taxon.errors.count, "error") %> prohibited this protein_gi_taxon from being saved:</h2>
+
+      <ul>
+      <% @protein_gi_taxon.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :protein_gi %><br />
+    <%= f.number_field :protein_gi %>
+  </div>
+  <div class="field">
+    <%= f.label :taxon_id %><br />
+    <%= f.number_field :taxon_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+module SequencedGenomesHelper
+end

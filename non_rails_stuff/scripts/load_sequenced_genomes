@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+# Loads the sequenced_genomes table from a GOLD file consisting of ncbi_taxon_id
+# and 'true' (for wgs) separated by space.
+#
+# daniel.lundin@scilifelab.se
+
+TABLE=sequenced_genomes
+
+usage() {
+  echo "`basename $0`: Loads the sequenced_genomes table in a PostgreSQL database with data from a gzipped NCBI dump file."
+  echo "	`basename $0` -d database -U dbuser path/gi_taxid_prot.dmp.gz"
+  echo
+  echo "		-d database: Name of database to connect to"
+  echo "		-U dbuser: Name of database user"
+}
+
+db=""
+dbuser=""
+
+while getopts :d:U:h opt; do
+  case $opt in
+    d )
+      db=$OPTARG ;;
+    h )
+      usage; exit 0 ;;
+    U )
+      dbuser=$OPTARG ;;
+    ? )
+      echo "Unknonw option $opt"
+      usage; exit 1 ;;
+  esac
+done
+shift $(($OPTIND - 1))
+dumpfile=$1
+
+echo "Truncating $TABLE"
+psql -d $db -U $dbuser -c "TRUNCATE TABLE $TABLE"
+
+echo "Inserting rows from $dumpfile"
+psql -d $db -U $dbuser -c "COPY $TABLE(ncbi_taxon_id, wgs) FROM STDIN;" < $dumpfile

@@ -1,0 +1,17 @@
+<p id='notice'><%= notice %></p>
+
+<p>
+  <%= @taxon_with_name.taxon_id %>
+  <b>NCBI taxon id:</b>
+  <%= @taxon_with_name.ncbi_taxon_id %>
+  <b>Scientific name:</b>
+  <%= @taxon_with_name.scientific_name %>
+  <b>Rank:</b>
+  <%= @taxon_with_name.node_rank %>
+  <b>Parent:</b>
+  <%= link_to @taxon_with_name.parent_taxon_id, @taxon_with_name.parent %>
+  <b>wgs:</b>
+  <%= @taxon_with_name.wgs %>
+</p>
+
+<%= link_to 'Back', taxon_with_names_path %>

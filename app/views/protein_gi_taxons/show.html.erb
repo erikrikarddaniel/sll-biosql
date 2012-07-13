@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Protein gi:</b>
+  <%= @protein_gi_taxon.protein_gi %>
+</p>
+
+<p>
+  <b>Taxon:</b>
+  <%= @protein_gi_taxon.taxon_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_protein_gi_taxon_path(@protein_gi_taxon) %> |
+<%= link_to 'Back', protein_gi_taxons_path %>

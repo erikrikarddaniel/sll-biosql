@@ -1,0 +1,16 @@
+<h1>Listing sequenced genomes</h1>
+
+<table>
+  <tr>
+    <th>NCBI taxon_id</th>
+    <th>Whole genome sequenced?</th>
+    <th></th>
+  </tr>
+
+<% @sequenced_genomes.each do |seq_genome| %>
+  <tr>
+    <td><%= seq_genome.ncbi_taxon_id %></td>
+    <td><%= seq_genome.wgs %></td>
+    <td><%= link_to 'Show', seq_genome %></td>
+<% end %>
+</table>
