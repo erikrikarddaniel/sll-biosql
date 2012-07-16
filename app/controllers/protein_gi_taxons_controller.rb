@@ -2,7 +2,7 @@ class ProteinGiTaxonsController < ApplicationController
   # GET /protein_gi_taxons
   # GET /protein_gi_taxons.json
   def index
-    @protein_gi_taxons = ProteinGiTaxon.all
+    @protein_gi_taxons = ProteinGiTaxon.all(:limit => 1000)
 
     respond_to do |format|
       format.html # index.html.erb
