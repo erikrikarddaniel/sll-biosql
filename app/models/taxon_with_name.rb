@@ -16,8 +16,8 @@
 
 class TaxonWithName < ActiveRecord::Base
   #attr_accessible :title, :body
-  set_table_name 'taxon_with_name'
-  set_primary_key 'taxon_id'
+  self.table_name = 'taxon_with_name'
+  self.primary_key = 'taxon_id'
 
   belongs_to :parent, :class_name => 'TaxonWithName', :foreign_key => :parent_taxon_id
   belongs_to :children, :class_name => 'TaxonWithName', :foreign_key => :parent_taxon_id
