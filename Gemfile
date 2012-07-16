@@ -12,6 +12,11 @@ gem 'rvm-capistrano'
 
 gem 'pg'
 
+#gem used for including sql-views in the schema.rb
+#so that they can be used in tests.
+gem 'schema_plus'
+
+
 group :development, :test do
 	gem 'rspec-rails', '2.8.1'
 	gem 'annotate', '~> 2.4.1.beta'
