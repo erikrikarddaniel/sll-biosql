@@ -18,4 +18,10 @@ class SequencedGenomesController < ApplicationController
       format.json { render json: @sequenced_genome }
     end
   end
+
+  def all_with_taxon_hierarchy
+    @sequenced_genomes = SequencedGenome.all
+    @sequenced_genomes.each do |gen|
+      gen
+  end
 end
