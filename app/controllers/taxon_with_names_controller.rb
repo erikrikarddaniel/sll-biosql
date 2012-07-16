@@ -5,7 +5,6 @@ class TaxonWithNamesController < ApplicationController
     else
       @taxon_with_names = TaxonWithName.all(:limit => 1000)
     end
-    logger.debug "Taxon with name, params: #{params.inspect}"
 
     respond_to do |format|
       format.html
