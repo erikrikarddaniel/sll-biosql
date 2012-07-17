@@ -13,7 +13,9 @@ class SequencedGenome < ActiveRecord::Base
   def self.all_taxa_with_ancestors
     taxa = []
     self.all.each do |gold_genome|
-      taxa << gold_genome.taxon_with_name.all_up_to_root
+      if gold_genome.taxon_with_name
+        taxa << gold_genome.taxon_with_name.all_up_to_root
+      end
     end
     return taxa
   end
