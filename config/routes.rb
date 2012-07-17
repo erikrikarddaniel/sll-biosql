@@ -1,7 +1,12 @@
 SllBiosql::Application.routes.draw do
   resources :protein_gi_taxons
   resources :fetch_gis
+  
+  
   resources :sequenced_genomes
+
+  get "gold_taxon_hierarchy" => "sequenced_genomes#all_with_taxa_hierarchy"
+
   resources :taxon_with_names
 
   root to: "static_pages#home"
