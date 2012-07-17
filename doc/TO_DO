@@ -1,0 +1,7 @@
+# To do-file for the sll-biosql project
+#
+
+
+* There are 9 rows in the Sequenced Genomes table that does not have a match in
+   either taxon_with_name view or taxon table. These are ignored by the 
+  gold_taxon_hierarchy.json query so far. 
