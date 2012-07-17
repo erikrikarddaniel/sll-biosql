@@ -18,4 +18,11 @@ class SequencedGenomesController < ApplicationController
       format.json { render json: @sequenced_genome }
     end
   end
+
+  def all_with_taxa_hierarchy
+    @all_hierarchies = SequencedGenome.all_taxa_with_ancestors
+    respond_to do |format|
+      format.json { render json: @all_hierarchies }
+    end
+  end
 end
