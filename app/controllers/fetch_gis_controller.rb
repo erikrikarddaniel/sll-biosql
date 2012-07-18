@@ -6,6 +6,7 @@ class FetchGisController < ApplicationController
     @getch_gis = []
     gis_hashes.each do |gi_hash|
       @fetch_gis << ProteinGiTaxon.find(gi_hash["gi"])
+      logger.debug "this is the fetch_gis: #{@fetch_gis}"
     end
     respond_to do |format|
       format.html # index.html.erb
