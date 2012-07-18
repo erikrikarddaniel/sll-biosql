@@ -9,16 +9,9 @@ class FetchGisController < ApplicationController
     end
     @fetch_gis = ProteinGiTaxon.find(:all, :conditions => ['protein_gi IN (?)', gis], :include => :taxon_with_name)
 
-    @output = []
-    @fetch_gis.each do |pgt|
-      pgt.ncbi_taxon_id = pgt.taxon_with_name.ncbi_taxon_id
-      @output << [pgt, pgt.ncbi_taxon_id]
-    end
-    @fetch_gis.as_json(:include => :taxon_with_name)
-
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @output }
+      format.json { render json: @fetch_gis, :include => [:ncbi_taxon_id] }
     end
   end
 
