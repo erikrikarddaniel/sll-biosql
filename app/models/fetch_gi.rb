@@ -10,4 +10,5 @@
 
 class FetchGi < ActiveRecord::Base
   attr_accessible :gi
+  belongs_to :taxon_with_name
 end

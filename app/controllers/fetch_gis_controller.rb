@@ -11,7 +11,7 @@ class FetchGisController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @fetch_gis, :include => [:ncbi_taxon_id] }
+      format.json { render json: @fetch_gis, :include => [:taxon_with_name] }
     end
   end
 
