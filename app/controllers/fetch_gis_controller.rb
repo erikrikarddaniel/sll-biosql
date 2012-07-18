@@ -8,14 +8,15 @@ class FetchGisController < ApplicationController
       gis = [95109515, 95109515, 107836860]
     end
     @fetch_gis = ProteinGiTaxon.find(:all, :conditions => ['protein_gi IN (?)', gis], :include => :taxon_with_name)
-    
+    @output = []
     @fetch_gis.each do |pgt|
       pgt.ncbi_taxon_id = pgt.taxon_with_name.ncbi_taxon_id
+      @output << [pgt, pgt.ncbi_taxon_id]
     end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @fetch_gis }
+      format.json { render json: @output }
     end
   end
 
