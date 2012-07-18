@@ -2,12 +2,7 @@ class FetchGisController < ApplicationController
   # GET /fetch_gis
   # GET /fetch_gis.json
   def index
-    if params["gis"]
-      gis = params["gis"]
-    else
-      gis = [95109515, 95109515, 107836860]
-    end
-    @fetch_gis = ProteinGiTaxon.find(:all, :conditions => ['protein_gi IN (?)', gis], :include => :taxon_with_name)
+    @fetch_gis = ProteinGiTaxon.find(:all, :conditions => ['protein_gi IN (?)', params["gis"]], :include => :taxon_with_name)
 
     respond_to do |format|
       format.html # index.html.erb
