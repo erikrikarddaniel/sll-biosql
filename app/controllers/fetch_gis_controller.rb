@@ -6,7 +6,7 @@ class FetchGisController < ApplicationController
     @getch_gis = []
     gis_hashes.each do |gi_hash|
       
-      @fetch_gis << ProteinGiTaxon.find(:first, :conditions => ["gi = ?", gi_hash["gi"]])
+      @fetch_gis << ProteinGiTaxon.find(:first, :conditions => ["protein_gi = ?", gi_hash["gi"]])
     end
     respond_to do |format|
       format.html # index.html.erb
