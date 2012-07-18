@@ -2,7 +2,11 @@ class FetchGisController < ApplicationController
   # GET /fetch_gis
   # GET /fetch_gis.json
   def index
-    @fetch_gis = ProteinGiTaxon.find_all_by_gi(params["gis"])
+    @fetch_gis = ProteinGiTaxon.find_all_by_gi(params["gis"], :include => :taxon)
+    
+    @fetch_gis.each do |pgt|
+      pgt.ncbi_taxon_id = pgt.taxon.ncbi_taxon_id
+    end
 
     respond_to do |format|
       format.html # index.html.erb
