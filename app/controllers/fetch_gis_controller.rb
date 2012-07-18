@@ -3,7 +3,7 @@ class FetchGisController < ApplicationController
   # GET /fetch_gis.json
   def index
     gis_hashes = params["gis"]
-    @getch_gis = []
+    @fetch_gis = []
     gis_hashes.each do |gi_hash|
       row = ProteinGiTaxon.find(:first, :conditions => ["protein_gi = ?", gi_hash["gi"]])
       if row 
