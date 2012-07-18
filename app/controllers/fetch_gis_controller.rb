@@ -2,8 +2,11 @@ class FetchGisController < ApplicationController
   # GET /fetch_gis
   # GET /fetch_gis.json
   def index
-    @fetch_gis = FetchGi.all
-
+    gis_hashes = params["gis"]
+    @getch_gis = []
+    gis_hashes.each do |gi_hash|
+      @fetch_gis << ProteinGiTaxon.find(gi_hash["gi"])
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @fetch_gis }
