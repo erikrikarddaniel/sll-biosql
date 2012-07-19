@@ -6,6 +6,7 @@ SllBiosql::Application.routes.draw do
   resources :sequenced_genomes
 
   get "gold_taxon_hierarchy" => "sequenced_genomes#all_with_taxa_hierarchy"
+  get "gold_taxon_hierarchy_test" => "sequenced_genomes#all_with_taxa_hierarchy_test"
 
   resources :taxon_with_names
 

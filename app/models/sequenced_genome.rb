@@ -19,4 +19,15 @@ class SequencedGenome < ActiveRecord::Base
     end
     return taxa
   end
+
+  def self.all_taxa_with_ancestors_test
+    taxa = []
+    self.all(:limit => 10).each do |gold_genome|
+      if gold_genome.taxon_with_name
+        taxa << gold_genome.taxon_with_name.all_up_to_root
+      end
+    end
+    return taxa
+  end
+
 end
