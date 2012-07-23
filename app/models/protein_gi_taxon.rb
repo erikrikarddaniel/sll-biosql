@@ -12,5 +12,5 @@ class ProteinGiTaxon < ActiveRecord::Base
   attr_accessor :ncbi_taxon_id
   self.primary_key = :protein_gi
 
-  belongs_to :taxon_with_name, :foreign_key => :taxon_id
+  belongs_to :taxon_with_name, :foreign_key => :ncbi_taxon_id
 end

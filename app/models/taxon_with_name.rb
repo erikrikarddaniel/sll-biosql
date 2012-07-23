@@ -22,7 +22,7 @@ class TaxonWithName < ActiveRecord::Base
   belongs_to :parent, :class_name => 'TaxonWithName', :foreign_key => :parent_taxon_id
   has_many :children, :class_name => 'TaxonWithName', :foreign_key => :parent_taxon_id
 
-  has_many :protein_gi_taxons, :foreign_key => :taxon_id
+  has_many :protein_gi_taxons, :foreign_key => :ncbi_taxon_id
   
   def all_up_to_root
     all_up_to_root_rec(self, [])
