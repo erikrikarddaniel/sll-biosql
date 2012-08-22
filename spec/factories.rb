@@ -6,8 +6,9 @@ FactoryGirl.define do
       parent_taxon
       wgs 'true'
     end
-    factory :taxon_name do
-      sequence(:
+#    factory :taxon_name do
+#      sequence(:
+#    end
   end
   factory :hmm_profile2 do
     sequence(:name){ |n| "Example Class #{n}" }

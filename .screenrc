@@ -1,4 +1,5 @@
 sessionname sll-biosql
+setenv ROOT $PWD
 screen -t root
 screen -t server
 screen -t autotest
@@ -23,6 +24,9 @@ screen -t stylesheets
 chdir ../../../log
 screen -t log
 chdir ..
+chdir db/migrate
+screen -t migrate
+chdir $ROOT
 screen -t man
 screen -t console
 screen -t root
