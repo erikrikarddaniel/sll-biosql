@@ -1,12 +1,12 @@
 module NonRailsTestdata
+  TESTDATADIR = "non_rails_stuff/testdata/"
+
   def insert_non_rails_testdata
     db = ActiveRecord::Base.connection
     datadir = "#{Rails.root}/#{TESTDATADIR}"
-    puts "*** Inserting testdata from #{datadir} ***"
     Dir.open(datadir).each do |file|
       next unless file =~ /\.sql/
       next if file =~ /^\./
-      puts "Handling #{file}"
       if file =~ /\.gz$/
 	db.execute(`gunzip -c #{datadir}/#{file}`)
       elsif file =~ /\.bz2$/
