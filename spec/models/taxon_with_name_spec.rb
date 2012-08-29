@@ -12,6 +12,10 @@ describe TaxonWithName do
     @cellular = TaxonWithName.find_by_scientific_name('cellular organisms') 
     @bacteria = TaxonWithName.find_by_scientific_name('Bacteria')
     @enterophage = TaxonWithName.find_by_scientific_name('Enterobacteria phage PRD1')
+    @homo = TaxonWithName.find_by_scientific_name('Homo')
+    @hs = TaxonWithName.find_by_scientific_name('Homo sapiens')
+    @hs = TaxonWithName.find_by_scientific_name('Homo sapiens')
+    @neanderthal = TaxonWithName.find_by_scientific_name('Homo sapiens neanderthalensis')
   end
 
   subject { @root }
@@ -21,6 +25,13 @@ describe TaxonWithName do
 
   it { should respond_to(:children) }
   its(:children) { should include @cellular }
+
+  describe 'parent-child relationsships' do
+    subject { @hs }
+
+    its(:parent) { should == @homo }
+    its(:children) { should == [ @neanderthal ] }
+  end
 
   describe 'whole genome sequenced' do
     before do
