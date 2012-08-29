@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: taxon_with_name
+#
+#  taxon_id          :integer         primary key
+#  parent_taxon_id   :integer
+#  ncbi_taxon_id     :integer
+#  node_rank         :string(32)
+#  genetic_code      :integer(2)
+#  mito_genetic_code :integer(2)
+#  left_value        :integer
+#  right_value       :integer
+#  scientific_name   :string(255)
+#  wgs               :boolean
+#
+
 require 'spec_helper'
 
 describe TaxonWithName do
