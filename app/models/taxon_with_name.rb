@@ -15,14 +15,17 @@
 #
 
 class TaxonWithName < ActiveRecord::Base
-  #attr_accessible :title, :body
   self.table_name = 'taxon_with_name'
   self.primary_key = 'taxon_id'
 
-  belongs_to :parent, :class_name => 'TaxonWithName', :foreign_key => :parent_taxon_id
-  has_many :children, :class_name => 'TaxonWithName', :foreign_key => :parent_taxon_id
+  has_many :children, :class_name => 'TaxonWithName', :foreign_key => 'parent_taxon_id', :primary_key => 'taxon_id'
+  belongs_to :parent, :class_name => 'TaxonWithName', :foreign_key => 'parent_taxon_id', :primary_key => 'taxon_id'
 
   has_many :protein_gi_taxons, :foreign_key => :taxon_id, :primary_key => :ncbi_taxon_id
+
+  def TaxonWithName.root
+    TaxonWithName.where('taxon_id = parent_taxon_id').first
+  end
   
   def all_up_to_root
     all_up_to_root_rec(self, [])

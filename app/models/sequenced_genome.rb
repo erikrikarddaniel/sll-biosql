@@ -7,6 +7,7 @@
 #
 
 class SequencedGenome < ActiveRecord::Base
+  self.primary_key = 'ncbi_taxon_id'
   attr_accessible :ncbi_taxon_id, :wgs
   has_one :taxon_with_name, :foreign_key => :ncbi_taxon_id
 
