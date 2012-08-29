@@ -1,0 +1,17 @@
+The list of NCBI taxon ids were downloaded from:
+
+  http://www.phantome.org/Downloads/genomes/genbank/current/
+
+The file is in HTML which was manually modified so that each filename in the
+listing was converted to a taxon id by:
+
+1. Deleting head rows
+
+2. Deleting all rows from the first Mycophage row, i.e. a row with '666666...'.
+
+3. Deleting everything from each line except the first number, the taxon id, in
+the first string like "10658.1.gbk".
+
+  In vim: ":%s/.*[^0-9]\([0-9]\+\)\.[0-9]\+\.gbk.*/\1/"
+
+4. Add a tab and 'true' to each line.
