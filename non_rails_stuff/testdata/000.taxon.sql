@@ -10,56 +10,56 @@ INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_c
   VALUES(102629, 131567, 1, 'no rank', 1, 0, 199140, 1830837)
 ;
 INSERT INTO taxon_name(taxon_id, name, name_class)
-  VALUES(1, 'cellular organisms', 'scientific name')
+  VALUES(102629, 'cellular organisms', 'scientific name')
 ;
 -- other sequences
 INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
   VALUES(12262, 28384, 1, 'no rank', 1, 0, 186244, 199139)
 ;
 INSERT INTO taxon_name(taxon_id, name, name_class)
-  VALUES(1, 'other sequences', 'scientific name')
+  VALUES(12262, 'other sequences', 'scientific name')
 ;
 -- unclassified sequences
 INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
   VALUES(10063, 12908, 1, 'no rank', 1, 0, 185380, 186243)
 ;
 INSERT INTO taxon_name(taxon_id, name, name_class)
-  VALUES(1, 'unclassified sequences', 'scientific name')
+  VALUES(10063, 'unclassified sequences', 'scientific name')
 ;
 -- Viroids
 INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
   VALUES(10041, 12884, 1, 'superkingdom', 1, 0, 185202, 185379)
 ;
 INSERT INTO taxon_name(taxon_id, name, name_class)
-  VALUES(1, 'Viroids', 'scientific name')
+  VALUES(10041, 'Viroids', 'scientific name')
 ;
 -- Viruses
 INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
   VALUES(8380, 10239, 1, 'superkingdom', 1, 0, 2, 185201)
 ;
 INSERT INTO taxon_name(taxon_id, name, name_class)
-  VALUES(1, 'Viruses', 'scientific name')
+  VALUES(8380, 'Viruses', 'scientific name')
 ;
 -- Eukaryota
 INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
   VALUES(2170, 2759, 102629, 'superkingdom', 1, 0, 710171, 1830836)
 ;
 INSERT INTO taxon_name(taxon_id, name, name_class)
-  VALUES(1, 'Eukaryota', 'scientific name')
+  VALUES(2170, 'Eukaryota', 'scientific name')
 ;
 -- Archaea
 INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
   VALUES(1706, 2157, 102629, 'superkingdom', 1, 0, 697249, 710170)
 ;
 INSERT INTO taxon_name(taxon_id, name, name_class)
-  VALUES(1, 'Archaea', 'scientific name')
+  VALUES(1706, 'Archaea', 'scientific name')
 ;
 -- Bacteria
 INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
   VALUES(2, 2, 102629, 'superkingdom', 1, 0, 199141, 697248)
 ;
 INSERT INTO taxon_name(taxon_id, name, name_class)
-  VALUES(1, 'Bacteria', 'scientific name')
+  VALUES(2, 'Bacteria', 'scientific name')
 ;
 -- E. coli hierarchy
 INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
@@ -321,4 +321,60 @@ INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_c
 ;
 INSERT INTO taxon_name(taxon_id, name, name_class)
   VALUES(42080, 'Homo sapiens neanderthalensis', 'scientific name')
+;
+-- Phage: Enterobacteria phage PRD1
+INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
+  VALUES(17322, 35237, 8380, 'no rank', 1, 0, 7583, 16764)
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(17322, 'dsDNA viruses, no RNA stage', 'scientific name')
+;
+INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
+  VALUES(8704, 10656, 17322, 'family', 11, 0, 10548, 10575)
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(8704, 'Tectiviridae', 'scientific name')
+;
+INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
+  VALUES(8705, 10657, 8704, 'genus', 11, 0, 10549, 10574)
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(8705, 'Tectivirus', 'scientific name')
+;
+INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
+  VALUES(8706, 10658, 8705, 'species', 11, 0, 10550, 10561)
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(8706, 'Enterobacteria phage PRD1', 'scientific name')
+;
+-- Streptomyces phage VWB
+INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
+  VALUES(12682, 28883, 17322, 'order', 11, 0, 10582, 13899)
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(12682, 'Caudovirales', 'scientific name')
+;
+INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
+  VALUES(8735, 10699, 12682, 'family', 11, 0, 11591, 13326)
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(8735, 'Siphoviridae', 'scientific name')
+;
+INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
+  VALUES(152812, 186765, 8735, 'genus', 11, 0, 11592, 11717)
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(152812, 'Lambda-like viruses', 'scientific name')
+;
+INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
+  VALUES(284615, 335795, 152812, 'no rank', 11, 0, 11613, 11708)
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(284615, 'unclassified Lambda-like viruses', 'scientific name')
+;
+INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
+  VALUES(8737, 10702, 284615, 'species', 11, 0, 11616, 11617)
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(8737, 'Streptomyces phage VWB', 'scientific name')
 ;

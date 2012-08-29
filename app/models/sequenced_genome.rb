@@ -7,7 +7,7 @@
 #
 
 class SequencedGenome < ActiveRecord::Base
-  attr_accessible :ncbi_taxon_id, :sequenced
+  attr_accessible :ncbi_taxon_id, :wgs
   has_one :taxon_with_name, :foreign_key => :ncbi_taxon_id
 
   def self.all_taxa_with_ancestors
@@ -29,5 +29,4 @@ class SequencedGenome < ActiveRecord::Base
     end
     return taxa
   end
-
 end
