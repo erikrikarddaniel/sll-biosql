@@ -27,21 +27,22 @@ describe ProteinGiTaxonsController do
 #    {}
 #  end
 #  
-#  # This should return the minimal set of values that should be in the session
-#  # in order to pass any filters (e.g. authentication) defined in
-#  # ProteinGiTaxonsController. Be sure to keep this updated too.
-#  def valid_session
-#    {}
-#  end
-#
-#  describe "GET index" do
-#    it "assigns all protein_gi_taxons as @protein_gi_taxons" do
-#      protein_gi_taxon = ProteinGiTaxon.create! valid_attributes
-#      get :index, {}, valid_session
-#      assigns(:protein_gi_taxons).should eq([protein_gi_taxon])
-#    end
-#  end
-#
+  # This should return the minimal set of values that should be in the session
+  # in order to pass any filters (e.g. authentication) defined in
+  # ProteinGiTaxonsController. Be sure to keep this updated too.
+  def valid_session
+    {}
+  end
+
+  describe "GET index" do
+    it "assigns all protein_gi_taxons as @protein_gi_taxons" do
+      protein_gi_taxa = ProteinGiTaxon.all.sort_by { |git| [ git.taxon_id, git.protein_gi ] }[0..9]
+      warn "#{__FILE__}:#{__LINE__}: protein_gi_taxa: #{protein_gi_taxa}"
+      get :index, {}, valid_session
+      assigns(:protein_gi_taxons)[0..9].should eq(protein_gi_taxa)
+    end
+  end
+
 #  describe "GET show" do
 #    it "assigns the requested protein_gi_taxon as @protein_gi_taxon" do
 #      protein_gi_taxon = ProteinGiTaxon.create! valid_attributes
