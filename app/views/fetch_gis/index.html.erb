@@ -1,2 +1,8 @@
 <h1>Listing fetch_gis</h1>
-This page is mainly intended to be viewed/called in json format with supplied protein_gi:s
+<p>This page is mainly intended to be viewed/called in json format with supplied protein_gi:s.</p>
+<p>But here's a list anyway:</p>
+<table>
+  <% @fetch_gis.each do |gi| %>
+  <tr><td><%= gi.gi %></td></tr>
+  <% end %>
+</table>
