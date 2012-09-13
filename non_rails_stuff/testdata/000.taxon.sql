@@ -110,6 +110,9 @@ INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_c
 INSERT INTO taxon_name(taxon_id, name, name_class)
   VALUES(468316, 'Escherichia coli O157:H7 str. TW14359', 'scientific name')
 ;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(468316, 'Escherichia coli O157:H7 strain TW14359', 'equivalent name')
+;
 -- Pseudomonas aeruginosa
 INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
   VALUES(   49616, 72274, 956, 'order', 11, 0, 220326, 253309)
@@ -146,6 +149,15 @@ INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_c
 ;
 INSERT INTO taxon_name(taxon_id, name, name_class)
   VALUES(173252, 'Pseudomonas aeruginosa PAO1', 'scientific name')
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(173252, 'Pseudomonas aeruginosa PA01', 'misspelling')
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(173252, 'Pseudomonas aeruginosa str. PAO1', 'synonym')
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(173252, 'Pseudomonas aeruginosa str. PA01', 'misspelling')
 ;
 -- Homo sapiens neanderthalensis
 INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
@@ -316,11 +328,26 @@ INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_c
 INSERT INTO taxon_name(taxon_id, name, name_class)
   VALUES(7853, 'Homo sapiens', 'scientific name')
 ;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(7853, 'man', 'common name')
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(7853, 'human', 'genbank common name')
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(7853, 'Homo sapiens Linnaeus, 1758', 'authority')
+;
 INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
   VALUES(   42080, 63221, 7853, 'subspecies', 1, 2, 1775984, 1775985)
 ;
 INSERT INTO taxon_name(taxon_id, name, name_class)
   VALUES(42080, 'Homo sapiens neanderthalensis', 'scientific name')
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(42080, 'Homo neanderthalensis', 'synonym')
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(42080, 'Neanderthal', 'common name')
 ;
 -- Phage: Enterobacteria phage PRD1
 INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_code, mito_genetic_code, left_value, right_value)
@@ -377,4 +404,10 @@ INSERT INTO taxon(taxon_id, ncbi_taxon_id, parent_taxon_id, node_rank, genetic_c
 ;
 INSERT INTO taxon_name(taxon_id, name, name_class)
   VALUES(8737, 'Streptomyces phage VWB', 'scientific name')
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(8737, 'Bacteriophage VWB', 'synonym')
+;
+INSERT INTO taxon_name(taxon_id, name, name_class)
+  VALUES(8737, 'Actinophage VWB', 'synonym')
 ;
