@@ -19,14 +19,13 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe ProteinGiTaxonsController do
-#
-#  # This should return the minimal set of attributes required to create a valid
-#  # ProteinGiTaxon. As you add validations to ProteinGiTaxon, be sure to
-#  # update the return value of this method accordingly.
-#  def valid_attributes
-#    {}
-#  end
-#  
+  # This should return the minimal set of attributes required to create a valid
+  # ProteinGiTaxon. As you add validations to ProteinGiTaxon, be sure to
+  # update the return value of this method accordingly.
+  def valid_attributes
+    { :taxon_id => 100, :protein_gi => 100 }
+  end
+  
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ProteinGiTaxonsController. Be sure to keep this updated too.
@@ -36,130 +35,16 @@ describe ProteinGiTaxonsController do
 
   describe "GET index" do
     it "assigns all protein_gi_taxons as @protein_gi_taxons" do
-      protein_gi_taxa = ProteinGiTaxon.all.sort_by { |git| [ git.taxon_id, git.protein_gi ] }[0..9]
-      warn "#{__FILE__}:#{__LINE__}: protein_gi_taxa: #{protein_gi_taxa}"
       get :index, {}, valid_session
-      assigns(:protein_gi_taxons)[0..9].should eq(protein_gi_taxa)
+      assigns(:protein_gi_taxons).should eq([])
     end
   end
 
-#  describe "GET show" do
-#    it "assigns the requested protein_gi_taxon as @protein_gi_taxon" do
-#      protein_gi_taxon = ProteinGiTaxon.create! valid_attributes
-#      get :show, {:id => protein_gi_taxon.to_param}, valid_session
-#      assigns(:protein_gi_taxon).should eq(protein_gi_taxon)
-#    end
-#  end
-#
-#  describe "GET new" do
-#    it "assigns a new protein_gi_taxon as @protein_gi_taxon" do
-#      get :new, {}, valid_session
-#      assigns(:protein_gi_taxon).should be_a_new(ProteinGiTaxon)
-#    end
-#  end
-#
-#  describe "GET edit" do
-#    it "assigns the requested protein_gi_taxon as @protein_gi_taxon" do
-#      protein_gi_taxon = ProteinGiTaxon.create! valid_attributes
-#      get :edit, {:id => protein_gi_taxon.to_param}, valid_session
-#      assigns(:protein_gi_taxon).should eq(protein_gi_taxon)
-#    end
-#  end
-#
-#  describe "POST create" do
-#    describe "with valid params" do
-#      it "creates a new ProteinGiTaxon" do
-#        expect {
-#          post :create, {:protein_gi_taxon => valid_attributes}, valid_session
-#        }.to change(ProteinGiTaxon, :count).by(1)
-#      end
-#
-#      it "assigns a newly created protein_gi_taxon as @protein_gi_taxon" do
-#        post :create, {:protein_gi_taxon => valid_attributes}, valid_session
-#        assigns(:protein_gi_taxon).should be_a(ProteinGiTaxon)
-#        assigns(:protein_gi_taxon).should be_persisted
-#      end
-#
-#      it "redirects to the created protein_gi_taxon" do
-#        post :create, {:protein_gi_taxon => valid_attributes}, valid_session
-#        response.should redirect_to(ProteinGiTaxon.last)
-#      end
-#    end
-#
-#    describe "with invalid params" do
-#      it "assigns a newly created but unsaved protein_gi_taxon as @protein_gi_taxon" do
-#        # Trigger the behavior that occurs when invalid params are submitted
-#        ProteinGiTaxon.any_instance.stub(:save).and_return(false)
-#        post :create, {:protein_gi_taxon => {}}, valid_session
-#        assigns(:protein_gi_taxon).should be_a_new(ProteinGiTaxon)
-#      end
-#
-#      it "re-renders the 'new' template" do
-#        # Trigger the behavior that occurs when invalid params are submitted
-#        ProteinGiTaxon.any_instance.stub(:save).and_return(false)
-#        post :create, {:protein_gi_taxon => {}}, valid_session
-#        response.should render_template("new")
-#      end
-#    end
-#  end
-#
-#  describe "PUT update" do
-#    describe "with valid params" do
-#      it "updates the requested protein_gi_taxon" do
-#        protein_gi_taxon = ProteinGiTaxon.create! valid_attributes
-#        # Assuming there are no other protein_gi_taxons in the database, this
-#        # specifies that the ProteinGiTaxon created on the previous line
-#        # receives the :update_attributes message with whatever params are
-#        # submitted in the request.
-#        ProteinGiTaxon.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-#        put :update, {:id => protein_gi_taxon.to_param, :protein_gi_taxon => {'these' => 'params'}}, valid_session
-#      end
-#
-#      it "assigns the requested protein_gi_taxon as @protein_gi_taxon" do
-#        protein_gi_taxon = ProteinGiTaxon.create! valid_attributes
-#        put :update, {:id => protein_gi_taxon.to_param, :protein_gi_taxon => valid_attributes}, valid_session
-#        assigns(:protein_gi_taxon).should eq(protein_gi_taxon)
-#      end
-#
-#      it "redirects to the protein_gi_taxon" do
-#        protein_gi_taxon = ProteinGiTaxon.create! valid_attributes
-#        put :update, {:id => protein_gi_taxon.to_param, :protein_gi_taxon => valid_attributes}, valid_session
-#        response.should redirect_to(protein_gi_taxon)
-#      end
-#    end
-#
-#    describe "with invalid params" do
-#      it "assigns the protein_gi_taxon as @protein_gi_taxon" do
-#        protein_gi_taxon = ProteinGiTaxon.create! valid_attributes
-#        # Trigger the behavior that occurs when invalid params are submitted
-#        ProteinGiTaxon.any_instance.stub(:save).and_return(false)
-#        put :update, {:id => protein_gi_taxon.to_param, :protein_gi_taxon => {}}, valid_session
-#        assigns(:protein_gi_taxon).should eq(protein_gi_taxon)
-#      end
-#
-#      it "re-renders the 'edit' template" do
-#        protein_gi_taxon = ProteinGiTaxon.create! valid_attributes
-#        # Trigger the behavior that occurs when invalid params are submitted
-#        ProteinGiTaxon.any_instance.stub(:save).and_return(false)
-#        put :update, {:id => protein_gi_taxon.to_param, :protein_gi_taxon => {}}, valid_session
-#        response.should render_template("edit")
-#      end
-#    end
-#  end
-#
-#  describe "DELETE destroy" do
-#    it "destroys the requested protein_gi_taxon" do
-#      protein_gi_taxon = ProteinGiTaxon.create! valid_attributes
-#      expect {
-#        delete :destroy, {:id => protein_gi_taxon.to_param}, valid_session
-#      }.to change(ProteinGiTaxon, :count).by(-1)
-#    end
-#
-#    it "redirects to the protein_gi_taxons list" do
-#      protein_gi_taxon = ProteinGiTaxon.create! valid_attributes
-#      delete :destroy, {:id => protein_gi_taxon.to_param}, valid_session
-#      response.should redirect_to(protein_gi_taxons_url)
-#    end
-#  end
-
+  describe "GET show" do
+    it "assigns the requested protein_gi_taxon as @protein_gi_taxon" do
+      protein_gi_taxon = ProteinGiTaxon.create! valid_attributes
+      get :show, { :id => protein_gi_taxon.to_param }, valid_session
+      assigns(:protein_gi_taxon).should eq(protein_gi_taxon)
+    end
+  end
 end
