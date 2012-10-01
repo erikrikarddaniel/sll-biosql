@@ -271,8 +271,9 @@ ActiveRecord::Schema.define(:version => 20120713133000) do
     t.foreign_key ["subject_seqfeature_id"], "seqfeature", ["seqfeature_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkchildfeat_seqfeatrel"
   end
 
-  create_table "sequenced_genomes", :primary_key => "ncbi_taxon_id", :default => { :expr => "nextval('sequenced_genomes_ncbi_taxon_id_seq'::regclass)" }, :force => true do |t|
-    t.boolean "wgs"
+  create_table "sequenced_genomes", :id => false, :force => true do |t|
+    t.integer "ncbi_taxon_id",                    :null => false
+    t.boolean "wgs",           :default => false, :null => false
   end
 
   create_table "taxon_name", :id => false, :force => true do |t|
