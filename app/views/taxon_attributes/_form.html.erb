@@ -1,0 +1,29 @@
+<%= form_for(@taxon_attribute) do |f| %>
+  <% if @taxon_attribute.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@taxon_attribute.errors.count, "error") %> prohibited this taxon_attribute from being saved:</h2>
+
+      <ul>
+      <% @taxon_attribute.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ncbi_taxon_id %><br />
+    <%= f.number_field :ncbi_taxon_id %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br />
+    <%= f.text_field :value %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

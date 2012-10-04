@@ -1,4 +1,6 @@
 SllBiosql::Application.routes.draw do
+  resources :taxon_attributes
+
   resources :protein_gi_taxons
   resources :fetch_gis
   
