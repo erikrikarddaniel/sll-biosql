@@ -80,4 +80,13 @@ class FetchGisController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def taxon_for_gi
+    @fetch_gi = FetchGi.find(params[:gi])
+    @taxon = @fetch_gi.taxon_with_name
+    
+    respond_to do |format|
+      format.json { render json: @taxon }
+    end
+  end
 end
