@@ -2,8 +2,6 @@ class FetchGisController < ApplicationController
   # GET /fetch_gis
   # GET /fetch_gis.json
   def index
-    # What's this doing here, Johannes? - DL
-    #@fetch_gis = ProteinGiTaxon.find(:all, :conditions => ['protein_gi IN (?)', params["gis"]], :include => :taxon_with_name)
     @fetch_gis = FetchGi.all
 
     respond_to do |format|

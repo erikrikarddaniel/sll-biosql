@@ -7,7 +7,8 @@ SllBiosql::Application.routes.draw do
 
   get "gold_taxon_hierarchy" => "sequenced_genomes#all_with_taxa_hierarchy"
   get "gold_taxon_hierarchy_test" => "sequenced_genomes#all_with_taxa_hierarchy_test"
-
+  get "wgs_ids" => "sequenced_genomes#all_ids"
+  get "full_taxa_for_wgs_id" => "sequenced_genomes#taxon_with_ancestors"
   resources :taxon_with_names
 
   root to: "static_pages#home"

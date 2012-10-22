@@ -33,4 +33,18 @@ class SequencedGenomesController < ApplicationController
     end
   end
 
+  def all_ids
+    @all = SequencedGenome.all
+    @all_ids = @all.map(&:id)
+    respond_to do |format|
+      format.json { render json: @all_ids }
+    end
+  end
+
+  def taxon_with_ancestors
+    @taxon = SequencedGenome.find(params[:id])
+    @hierarchy = @taxon.taxon_with_name.all_up_to_root
+    respond_to do |format|
+      format.json {render json: @hierarchy }
+    end
 end
