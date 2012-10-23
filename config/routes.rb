@@ -4,12 +4,9 @@ SllBiosql::Application.routes.draw do
   
   
   resources :sequenced_genomes
-
-  get "gold_taxon_hierarchy" => "sequenced_genomes#all_with_taxa_hierarchy"
-  get "gold_taxon_hierarchy_test" => "sequenced_genomes#all_with_taxa_hierarchy_test"
-  get "wgs_ids" => "sequenced_genomes#all_ids"
-  get "full_taxa_for_wgs_id" => "sequenced_genomes#taxon_with_ancestors"
-  get "taxon_for_gi" => "fetch_gi#taxon_for_gi"
+  get "wgs_ncbi_taxon_ids" => "sequenced_genomes#all_ncbi_taxon_ids"
+  get "ncbi_taxon_id2full_taxon_hierarchy" => "sequenced_genomes#ncbi_taxon_id2full_taxon_hierarchy"
+  get "gi2ncbi_taxon_id" => "protein_gi_taxons#gi2ncbi_taxon_id"
   resources :taxon_with_names
 
   root to: "static_pages#home"
