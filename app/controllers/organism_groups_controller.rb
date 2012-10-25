@@ -1,3 +1,6 @@
+require 'file_parsers'
+include FileParsers
+
 class OrganismGroupsController < ApplicationController
   # GET /organism_groups
   # GET /organism_groups.json
@@ -28,7 +31,6 @@ class OrganismGroupsController < ApplicationController
     respond_to do |format|
       format.html { render :show }
       format.json { _json }
-      #format.json { render json: { :organism_group => @organism_group, :ncbi_taxon_ids => @organism_group.organism_group_rows.map { |ogr| ogr.ncbi_taxon_id } } }
     end
   end
 
@@ -39,7 +41,7 @@ class OrganismGroupsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @organism_group }
+      format.json { _json }
     end
   end
 

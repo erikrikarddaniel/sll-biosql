@@ -10,7 +10,10 @@
 #  source     :text
 #
 
+require 'file_parsers'
 require 'spec_helper'
+
+include FileParsers
 
 describe OrganismGroup do
   let(:organism_group) { FactoryGirl.create(:organism_group) }
@@ -39,5 +42,13 @@ describe OrganismGroup do
     subject { @og2 }
 
     it { should_not be_valid }
+  end
+
+  describe "import cases" do
+    it "should import a list of ncbi_taxon_ids" do
+      parse_ncbi_taxon_id_for_organism_group(@organism_group, fixture_file_upload("/ncbi_taxon_ids.csv"))
+      @organism_group.organism_group_rows.length.should == 10
+      @organism_group.organism_group_rows.map { |r| r.ncbi_taxon_id }.should include(105560)
+    end
   end
 end
