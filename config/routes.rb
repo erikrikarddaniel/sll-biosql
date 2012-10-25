@@ -1,9 +1,13 @@
 SllBiosql::Application.routes.draw do
+  resources :organism_group_rows
+
+  resources :organism_groups
+  get "organism_group_by_name/:name" => "organism_groups#show_by_name"
+
   resources :taxon_attributes
 
   resources :protein_gi_taxons
   resources :fetch_gis
-  
   
   resources :sequenced_genomes
 

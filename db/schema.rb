@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121004124156) do
+ActiveRecord::Schema.define(:version => 20121025072623) do
 
   create_table "biodatabase", :primary_key => "biodatabase_id", :default => { :expr => "nextval('biodatabase_biodatabase_id_seq'::regclass)" }, :force => true do |t|
     t.string "name",        :limit => 128, :null => false
@@ -220,6 +220,22 @@ ActiveRecord::Schema.define(:version => 20121004124156) do
     t.index ["term_id"], :name => "locationqual_trm"
     t.foreign_key ["location_id"], "location", ["location_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkfeatloc_locqual"
     t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_locqual"
+  end
+
+  create_table "organism_groups", :force => true do |t|
+    t.string   "name"
+    t.boolean  "test"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "organism_group_rows", :force => true do |t|
+    t.integer  "organism_group_id"
+    t.integer  "ncbi_taxon_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.index ["organism_group_id"], :name => "index_organism_group_rows_on_organism_group_id"
+    t.foreign_key ["organism_group_id"], "organism_groups", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "organism_group_rows_organism_group_id_fkey"
   end
 
   create_table "protein_gi_taxons", :primary_key => "protein_gi", :default => { :expr => "nextval('protein_gi_taxons_protein_gi_seq'::regclass)" }, :force => true do |t|
