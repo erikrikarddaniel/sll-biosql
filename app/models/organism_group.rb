@@ -11,6 +11,6 @@
 
 class OrganismGroup < ActiveRecord::Base
   attr_accessible :name, :test
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   has_many :organism_group_rows, :dependent => :destroy
 end
