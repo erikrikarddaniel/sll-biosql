@@ -7,6 +7,7 @@
 #  ncbi_taxon_id     :integer
 #  created_at        :datetime        not null
 #  updated_at        :datetime        not null
+#  source_id         :text
 #
 
 require 'spec_helper'

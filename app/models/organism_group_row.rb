@@ -7,9 +7,10 @@
 #  ncbi_taxon_id     :integer
 #  created_at        :datetime        not null
 #  updated_at        :datetime        not null
+#  source_id         :text
 #
 
 class OrganismGroupRow < ActiveRecord::Base
-  attr_accessible :ncbi_taxon_id, :organism_group_id
+  attr_accessible :ncbi_taxon_id, :organism_group_id, :source_id
   belongs_to :organism_group
 end

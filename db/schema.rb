@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121025072623) do
+ActiveRecord::Schema.define(:version => 20121025123751) do
 
   create_table "biodatabase", :primary_key => "biodatabase_id", :default => { :expr => "nextval('biodatabase_biodatabase_id_seq'::regclass)" }, :force => true do |t|
     t.string "name",        :limit => 128, :null => false
@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(:version => 20121025072623) do
     t.boolean  "test"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.text     "source"
   end
 
   create_table "organism_group_rows", :force => true do |t|
@@ -234,6 +235,7 @@ ActiveRecord::Schema.define(:version => 20121025072623) do
     t.integer  "ncbi_taxon_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.text     "source_id"
     t.index ["organism_group_id"], :name => "index_organism_group_rows_on_organism_group_id"
     t.foreign_key ["organism_group_id"], "organism_groups", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "organism_group_rows_organism_group_id_fkey"
   end
