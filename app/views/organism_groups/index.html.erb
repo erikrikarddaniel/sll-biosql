@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Source</th>
     <th>Test</th>
     <th></th>
     <th></th>
@@ -12,6 +13,7 @@
 <% @organism_groups.each do |organism_group| %>
   <tr>
     <td><%= organism_group.name %></td>
+    <td><%= organism_group.source %></td>
     <td><%= organism_group.test %></td>
     <td><%= link_to 'Show', organism_group %></td>
     <td><%= link_to 'Edit', edit_organism_group_path(organism_group) %></td>

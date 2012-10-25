@@ -15,11 +15,15 @@ namespace :db do
   end
 
   def organism_groups
-    og = OrganismGroup.create(name: 'wgs', test: false)
-    og.organism_group_rows.create(ncbi_taxon_id: 329726)
-    og.organism_group_rows.create(ncbi_taxon_id: 442391)
-    og.organism_group_rows.create(ncbi_taxon_id: 208964)
-    og.organism_group_rows.create(ncbi_taxon_id: 1000565)
-    og.organism_group_rows.create(ncbi_taxon_id: 1005041)
+    og_gold = OrganismGroup.create(name: 'GOLD WGS', test: false, source: 'GOLD')
+    og_gold.organism_group_rows.create(source_id: 'Gi21198', ncbi_taxon_id: 1234596)
+    og_gold.organism_group_rows.create(source_id: 'Gi21185', ncbi_taxon_id: 1219061)
+    og_gold.organism_group_rows.create(source_id: 'Gi18915', ncbi_taxon_id: 1200302)
+    og_gold.organism_group_rows.create(source_id: 'Gi10962', ncbi_taxon_id: 1125723)
+    og_gold.organism_group_rows.create(source_id: 'Gi09682', ncbi_taxon_id: 1111137)
+
+    og_geba_2009 = OrganismGroup.create(name: 'GEBA 2009', test: false, source: 'Wu et al. Nature 2009')
+    og_geba_2009.organism_group_rows.create(ncbi_taxon_id: 1111137)
+    og_geba_2009.organism_group_rows.create(ncbi_taxon_id: 504728)
   end
 end

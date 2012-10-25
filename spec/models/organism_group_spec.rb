@@ -7,6 +7,7 @@
 #  test       :boolean
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
+#  source     :text
 #
 
 require 'spec_helper'
@@ -26,6 +27,17 @@ describe OrganismGroup do
   
   describe "Should not be valid when name is not present" do
     before { @organism_group.name = "" }
+    it { should_not be_valid }
+  end
+
+  describe "should not be possible to add another with the same name" do
+    before do
+      @organism_group.save!
+      @og2 = OrganismGroup.new(name: @organism_group.name)
+    end
+
+    subject { @og2 }
+
     it { should_not be_valid }
   end
 end
