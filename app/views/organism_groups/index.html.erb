@@ -1,0 +1,25 @@
+<h1>Listing organism_groups</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Test</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @organism_groups.each do |organism_group| %>
+  <tr>
+    <td><%= organism_group.name %></td>
+    <td><%= organism_group.test %></td>
+    <td><%= link_to 'Show', organism_group %></td>
+    <td><%= link_to 'Edit', edit_organism_group_path(organism_group) %></td>
+    <td><%= link_to 'Destroy', organism_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Organism group', new_organism_group_path %>

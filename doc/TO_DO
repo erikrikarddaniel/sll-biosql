@@ -4,5 +4,7 @@
 * The project is using an non-updated version of ruby: 1.9.3-p0, specified in the rvm config file. At this moment of writing, there exists 1.9.3-p286
 
 * There are 9 rows in the Sequenced Genomes table that does not have a match in
-   either taxon_with_name view or taxon table. These are ignored by the 
+  either taxon_with_name view or taxon table. These are ignored by the 
   gold_taxon_hierarchy.json query so far. 
+
+* Change name of taxon_id in protein_gi_taxons to ncbi_taxon_id.

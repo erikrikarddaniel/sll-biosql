@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Ncbi taxon:</b>
+  <%= @taxon_attribute.ncbi_taxon_id %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @taxon_attribute.type %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @taxon_attribute.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_taxon_attribute_path(@taxon_attribute) %> |
+<%= link_to 'Back', taxon_attributes_path %>

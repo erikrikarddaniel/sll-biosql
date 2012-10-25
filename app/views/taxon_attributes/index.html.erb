@@ -1,0 +1,27 @@
+<h1>Listing taxon_attributes</h1>
+
+<table>
+  <tr>
+    <th>Ncbi taxon</th>
+    <th>Type</th>
+    <th>Value</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @taxon_attributes.each do |taxon_attribute| %>
+  <tr>
+    <td><%= taxon_attribute.ncbi_taxon_id %></td>
+    <td><%= taxon_attribute.type %></td>
+    <td><%= taxon_attribute.value %></td>
+    <td><%= link_to 'Show', taxon_attribute %></td>
+    <td><%= link_to 'Edit', edit_taxon_attribute_path(taxon_attribute) %></td>
+    <td><%= link_to 'Destroy', taxon_attribute, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Taxon attribute', new_taxon_attribute_path %>
