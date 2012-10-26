@@ -29,7 +29,7 @@ class SequencedGenomesController < ApplicationController
 
   # GET /ncbi_taxon_id2full_taxon_hierarchy
   def ncbi_taxon_id2full_taxon_hierarchy
-    @taxon = SequencedGenome.find(params[:ncbi_id])
+    @taxon = SequencedGenome.find(params[:ncbi_taxon_id])
     @hierarchy = @taxon.taxon_with_name.all_up_to_root
     respond_to do |format|
       format.json {render json: @hierarchy }
