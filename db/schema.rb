@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20121025123751) do
 
-  create_table "biodatabase", :primary_key => "biodatabase_id", :default => { :expr => "nextval('biodatabase_biodatabase_id_seq'::regclass)" }, :force => true do |t|
+  create_table "biodatabase", :primary_key => "biodatabase_id", :default => { :expr => "nextval('biodatabase_pk_seq'::regclass)" }, :force => true do |t|
     t.string "name",        :limit => 128, :null => false
     t.string "authority",   :limit => 128
     t.text   "description"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.index ["authority"], :name => "db_auth"
   end
 
-  create_table "taxon", :primary_key => "taxon_id", :default => { :expr => "nextval('taxon_taxon_id_seq'::regclass)" }, :force => true do |t|
+  create_table "taxon", :primary_key => "taxon_id", :default => { :expr => "nextval('taxon_pk_seq'::regclass)" }, :force => true do |t|
     t.integer "ncbi_taxon_id"
     t.integer "parent_taxon_id"
     t.string  "node_rank",         :limit => 32
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.index ["right_value"], :name => "xaktaxon_right_value", :unique => true
   end
 
-  create_table "bioentry", :primary_key => "bioentry_id", :default => { :expr => "nextval('bioentry_bioentry_id_seq'::regclass)" }, :force => true do |t|
+  create_table "bioentry", :primary_key => "bioentry_id", :default => { :expr => "nextval('bioentry_pk_seq'::regclass)" }, :force => true do |t|
     t.integer "biodatabase_id",                :null => false
     t.integer "taxon_id"
     t.string  "name",           :limit => 40,  :null => false
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.foreign_key ["biodatabase_id"], "biodatabase", ["biodatabase_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkbiodatabase_bioentry"
   end
 
-  create_table "dbxref", :primary_key => "dbxref_id", :default => { :expr => "nextval('dbxref_dbxref_id_seq'::regclass)" }, :force => true do |t|
+  create_table "dbxref", :primary_key => "dbxref_id", :default => { :expr => "nextval('dbxref_pk_seq'::regclass)" }, :force => true do |t|
     t.string  "dbname",    :limit => 40,  :null => false
     t.string  "accession", :limit => 128, :null => false
     t.integer "version",                  :null => false
@@ -70,13 +70,13 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.foreign_key ["dbxref_id"], "dbxref", ["dbxref_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkdbxref_dblink"
   end
 
-  create_table "ontology", :primary_key => "ontology_id", :default => { :expr => "nextval('ontology_ontology_id_seq'::regclass)" }, :force => true do |t|
+  create_table "ontology", :primary_key => "ontology_id", :default => { :expr => "nextval('ontology_pk_seq'::regclass)" }, :force => true do |t|
     t.string "name",       :limit => 32, :null => false
     t.text   "definition"
     t.index ["name"], :name => "ontology_name_key", :unique => true
   end
 
-  create_table "term", :primary_key => "term_id", :default => { :expr => "nextval('term_term_id_seq'::regclass)" }, :force => true do |t|
+  create_table "term", :primary_key => "term_id", :default => { :expr => "nextval('term_pk_seq'::regclass)" }, :force => true do |t|
     t.string  "name",                      :null => false
     t.text    "definition"
     t.string  "identifier",  :limit => 40
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_entqual"
   end
 
-  create_table "reference", :primary_key => "reference_id", :default => { :expr => "nextval('reference_reference_id_seq'::regclass)" }, :force => true do |t|
+  create_table "reference", :primary_key => "reference_id", :default => { :expr => "nextval('reference_pk_seq'::regclass)" }, :force => true do |t|
     t.integer "dbxref_id"
     t.text    "location",                :null => false
     t.text    "title"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.foreign_key ["reference_id"], "reference", ["reference_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkreference_entryref"
   end
 
-  create_table "bioentry_relationship", :primary_key => "bioentry_relationship_id", :default => { :expr => "nextval('bioentry_relationship_bioentry_relationship_id_seq'::regclass)" }, :force => true do |t|
+  create_table "bioentry_relationship", :primary_key => "bioentry_relationship_id", :default => { :expr => "nextval('bioentry_relationship_pk_seq'::regclass)" }, :force => true do |t|
     t.integer "object_bioentry_id",  :null => false
     t.integer "subject_bioentry_id", :null => false
     t.integer "term_id",             :null => false
@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.foreign_key ["bioentry_id"], "bioentry", ["bioentry_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkbioentry_bioseq"
   end
 
-  create_table "comment", :primary_key => "comment_id", :default => { :expr => "nextval('comment_comment_id_seq'::regclass)" }, :force => true do |t|
+  create_table "comment", :primary_key => "comment_id", :default => { :expr => "nextval('comment_pk_seq'::regclass)" }, :force => true do |t|
     t.integer "bioentry_id",                 :null => false
     t.text    "comment_text",                :null => false
     t.integer "rank",         :default => 0, :null => false
@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "seqfeature", :primary_key => "seqfeature_id", :default => { :expr => "nextval('seqfeature_seqfeature_id_seq'::regclass)" }, :force => true do |t|
+  create_table "seqfeature", :primary_key => "seqfeature_id", :default => { :expr => "nextval('seqfeature_pk_seq'::regclass)" }, :force => true do |t|
     t.integer "bioentry_id",                                 :null => false
     t.integer "type_term_id",                                :null => false
     t.integer "source_term_id",                              :null => false
@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.foreign_key ["bioentry_id"], "bioentry", ["bioentry_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkbioentry_seqfeature"
   end
 
-  create_table "location", :primary_key => "location_id", :default => { :expr => "nextval('location_location_id_seq'::regclass)" }, :force => true do |t|
+  create_table "location", :primary_key => "location_id", :default => { :expr => "nextval('location_pk_seq'::regclass)" }, :force => true do |t|
     t.integer "seqfeature_id",                :null => false
     t.integer "dbxref_id"
     t.integer "term_id"
@@ -276,7 +276,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.foreign_key ["seqfeature_id"], "seqfeature", ["seqfeature_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkseqfeature_featqual"
   end
 
-  create_table "seqfeature_relationship", :primary_key => "seqfeature_relationship_id", :default => { :expr => "nextval('seqfeature_relationship_seqfeature_relationship_id_seq'::regclass)" }, :force => true do |t|
+  create_table "seqfeature_relationship", :primary_key => "seqfeature_relationship_id", :default => { :expr => "nextval('seqfeature_relationship_pk_seq'::regclass)" }, :force => true do |t|
     t.integer "object_seqfeature_id",  :null => false
     t.integer "subject_seqfeature_id", :null => false
     t.integer "term_id",               :null => false
@@ -321,7 +321,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkterm_trmdbxref"
   end
 
-  create_table "term_path", :primary_key => "term_path_id", :default => { :expr => "nextval('term_path_term_path_id_seq'::regclass)" }, :force => true do |t|
+  create_table "term_path", :primary_key => "term_path_id", :default => { :expr => "nextval('term_path_pk_seq'::regclass)" }, :force => true do |t|
     t.integer "subject_term_id",   :null => false
     t.integer "predicate_term_id", :null => false
     t.integer "object_term_id",    :null => false
@@ -337,7 +337,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.foreign_key ["ontology_id"], "ontology", ["ontology_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkontology_trmpath"
   end
 
-  create_table "term_relationship", :primary_key => "term_relationship_id", :default => { :expr => "nextval('term_relationship_term_relationship_id_seq'::regclass)" }, :force => true do |t|
+  create_table "term_relationship", :primary_key => "term_relationship_id", :default => { :expr => "nextval('term_relationship_pk_seq'::regclass)" }, :force => true do |t|
     t.integer "subject_term_id",   :null => false
     t.integer "predicate_term_id", :null => false
     t.integer "object_term_id",    :null => false

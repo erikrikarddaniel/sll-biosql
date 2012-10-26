@@ -19,18 +19,20 @@ class SequencedGenomesController < ApplicationController
     end
   end
 
-  def all_with_taxa_hierarchy
-    @all_hierarchies = SequencedGenome.all_taxa_with_ancestors
+  def all_ncbi_taxon_ids
+    @all = SequencedGenome.all
+    @all_ids = @all.map(&:ncbi_taxon_id)
     respond_to do |format|
-      format.json { render json: @all_hierarchies }
+      format.json { render json: @all_ids }
     end
   end
 
-  def all_with_taxa_hierarchy_test
-    @all_hierarchies = SequencedGenome.all_taxa_with_ancestors_test
+  # GET /ncbi_taxon_id2full_taxon_hierarchy
+  def ncbi_taxon_id2full_taxon_hierarchy
+    @taxon = SequencedGenome.find(params[:ncbi_id])
+    @hierarchy = @taxon.taxon_with_name.all_up_to_root
     respond_to do |format|
-      format.json { render json: @all_hierarchies }
-    end
+      format.json {render json: @hierarchy }
+    end      
   end
-
 end
