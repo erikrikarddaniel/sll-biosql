@@ -8,3 +8,11 @@
 
 Another interesting taxon, that's not added so far:
      ncbi_taxon_id: 759272, corresponds to gi: 340905392, present in NrdB-20rows (gb,  score: 431.8) AND NrdBe-20rows (gb, score: 635.4) (not in GOLDwgs)
+
+   These rows were added (exchanged with the four last) to GOLDWGStest100 manually:
+	ncbi_taxon_id: 395019
+     	ncbi_taxon_id: 9606
+     	ncbi_taxon_id: 329726
+     	ncbi_taxon_id: 504728
+	
+	for info see above
