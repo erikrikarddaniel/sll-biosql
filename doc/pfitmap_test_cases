@@ -1,0 +1,18 @@
+* Documentation for test cases:
+   I (Johannes) changed rows on GOLDWGStest10 manually:
+     ncbi_taxon_id: 395019, corresponds to gi: 161525957, present in NrdB-20rows (ref, score: 431.6)
+     ncbi_taxon_id: 9606, corresponds to gi: 4557845, present in NrdBe-20rows (ref,  score: 634.7)
+     ncbi_taxon_id: 329726, corresponds to gi: 158341282, present in NrdB-20rows (ref, score: 432.6) AND NrdBe-20rows (ref, score: 163.0)
+     ncbi_taxon_id: 504728, corresponds to gi: 291295355, present in NrdB-20rows (ref, score: 472.4) AND NrdBe-20rows (ref, score: 59.2)
+
+
+Another interesting taxon, that's not added so far:
+     ncbi_taxon_id: 759272, corresponds to gi: 340905392, present in NrdB-20rows (gb,  score: 431.8) AND NrdBe-20rows (gb, score: 635.4) (not in GOLDwgs)
+
+   These rows were added (exchanged with the four last) to GOLDWGStest100 manually:
+	ncbi_taxon_id: 395019
+     	ncbi_taxon_id: 9606
+     	ncbi_taxon_id: 329726
+     	ncbi_taxon_id: 504728
+	
+	for info see above
