@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @organism_group.name %>
+  <b>Source:</b>
+  <%= @organism_group.source %>
+  <b>Test:</b>
+  <%= @organism_group.test %>
+</p>
+
+<table>
+  <tr><th>NCBI taxon id</th><th>Source id</th></tr>
+  <% @organism_group.organism_group_rows.each do |ogr| %>
+    <tr>
+      <td><%= ogr.ncbi_taxon_id %></td>
+      <td><%= ogr.source_id %></td>
+    </tr>
+  <% end %>
+</table>
+
+
+<%= link_to 'Edit', edit_organism_group_path(@organism_group) %> |
+<%= link_to 'Back', organism_groups_path %>

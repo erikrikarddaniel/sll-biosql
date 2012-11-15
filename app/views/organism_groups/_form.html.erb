@@ -1,0 +1,29 @@
+<%= form_for(@organism_group) do |f| %>
+  <% if @organism_group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@organism_group.errors.count, "error") %> prohibited this organism_group from being saved:</h2>
+
+      <ul>
+      <% @organism_group.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :source %><br />
+    <%= f.text_field :source %>
+  </div>
+  <div class="field">
+    <%= f.label :test %><br />
+    <%= f.check_box :test %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
