@@ -16,6 +16,8 @@ gem 'pg'
 #so that they can be used in tests.
 gem 'schema_plus'
 
+# For the non_rails_stuff/scripts/dirlist2format script
+gem 'amatch'
 
 group :development, :test do
   gem 'rspec-rails', '2.8.1'
