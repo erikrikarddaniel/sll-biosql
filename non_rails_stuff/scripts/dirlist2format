@@ -102,10 +102,10 @@ end
 # Tries to find the name in the @taxmap, using amatch fuzzy searching if necessary
 def _lookup(name)
   return name if @taxmap[name]
-  warn "Didn't find #{name} in taxmap"
+  warn "Didn't find #{name} in taxmap -- searching for it using fuzzy matching" if @options[:verbose]
   lname = Levenshtein.new(name)
   n = @taxmap.keys.sort_by { |t| lname.match(t) }
-  warn "#{__LINE__}: 0: #{n[0]}, -1: #{n[-1]}"
+  warn "Returning #{n[0]} for #{name}" if @options[:verbose]
   n[0]
 end
 
@@ -156,7 +156,6 @@ begin
 	name.gsub!(/_/, ' ')
 	name = _lookup(name)
 	path.sub!(/.*(#{@options[:delete_until]})/, @options[:delete_until])
-	#warn "#{__LINE__}: Name: #{name}, path: #{path}"
       elsif line =~ /^-.*\s(\S+\.f[an]a(\.gz)?)/
 	file = $1
 	@results << { name: name, ncbi_taxon_id: @taxmap[name], path: path + file }
