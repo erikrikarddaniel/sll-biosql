@@ -16,5 +16,5 @@ clean:
 dirlist2format: dirlist2format.00
 
 dirlist2format.00:
-	../dirlist2format --verbose --taxmap=$@.taxmap $@.lslr > $@.out
+	@../dirlist2format --taxmap=$@.taxmap $@.lslr > $@.out
 	@$(CHECK)

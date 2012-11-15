@@ -120,7 +120,6 @@ begin
   File.open(@options[:taxmap]).each do |line|
     line.chomp!
     fields = line.split("\t")
-    warn "#{__LINE__}: fields: #{fields}"
     @taxmap[fields[0]] = fields[1]
   end
 rescue
