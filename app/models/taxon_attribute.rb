@@ -12,4 +12,5 @@
 class TaxonAttribute < ActiveRecord::Base
   attr_accessible :ncbi_taxon_id, :attrs
   store :attrs, accessors: [ :ncbi_genome_aa_file_path, :ncbi_genome_nuc_file_path ]
+  validates :ncbi_taxon_id, uniqueness: true
 end

@@ -24,4 +24,14 @@ describe TaxonAttribute do
   it { should respond_to(:ncbi_taxon_id) }
   it { should respond_to(:ncbi_genome_aa_file_path) }
   it { should respond_to(:ncbi_genome_nuc_file_path) }
+
+  describe 'only one instance per ncbi_taxon_id' do
+    before do
+      @ta = TaxonAttribute.new(ncbi_taxon_id: @taxon_attribute.ncbi_taxon_id)
+    end
+
+    subject { @ta }
+
+    it { should_not be_valid }
+  end
 end
