@@ -1,0 +1,105 @@
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/:
+totalt 32
+drwxrwxr-x 3 pallol staff 4096 25 maj  2011 genbank
+drwxrwxr-x 4 pallol staff 4096 24 maj  2011 genomes
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genbank:
+totalt 16
+drwxrwxr-x 4 pallol staff 4096 25 maj  2011 genomes
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genbank/genomes:
+totalt 1768
+drwxrwxr-x 2170 pallol staff 311296 27 sep 06.33 Bacteria
+drwxrwxr-x 4023 pallol staff 577536 27 sep 08.57 Bacteria_DRAFT
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genbank/genomes/Bacteria:
+totalt 34696
+drwxrwxr-x 2 pallol staff  4096 25 maj  2011 Acaryochloris_marina_MBIC11017_uid12997
+drwxr-xr-x 2 pallol uppmax 4096 27 feb  2012 Acetobacterium_woodii_DSM_1030_uid60713
+drwxrwxr-x 2 pallol staff  4096 25 maj  2011 Acetobacter_pasteurianus_IFO_3283_01_42C_uid31141
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genbank/genomes/Bacteria/Acaryochloris_marina_MBIC11017_uid12997:
+totalt 4028
+-r--r--r-- 1 pallol staff 2441998  8 jun 20.43 CP000828.faa
+-r--r--r-- 1 pallol staff  141986  8 jun 20.43 CP000838.faa
+-r--r--r-- 1 pallol staff  136027  8 jun 20.43 CP000839.faa
+-r--r--r-- 1 pallol staff  101189  8 jun 20.43 CP000840.faa
+-r--r--r-- 1 pallol staff   90226  8 jun 20.43 CP000841.faa
+-r--r--r-- 1 pallol staff   69763  8 jun 20.43 CP000842.faa
+-r--r--r-- 1 pallol staff   64452  8 jun 20.43 CP000843.faa
+-r--r--r-- 1 pallol staff   59716  8 jun 20.43 CP000844.faa
+-r--r--r-- 1 pallol staff   42286  8 jun 20.43 CP000845.faa
+-r--r--r-- 1 pallol staff     865  8 jun 20.43 CP000846.faa
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genbank/genomes/Bacteria/Acetobacterium_woodii_DSM_1030_uid60713:
+totalt 1708
+-r--r--r-- 1 pallol uppmax 1503598  8 jun 20.45 CP002987.faa
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genbank/genomes/Bacteria/Acetobacter_pasteurianus_IFO_3283_01_42C_uid31141:
+totalt 1652
+-r--r--r-- 1 pallol staff 1114539  8 jun 20.43 AP011163.faa
+-r--r--r-- 1 pallol staff   69290  8 jun 20.43 AP011164.faa
+-r--r--r-- 1 pallol staff   69895  8 jun 20.43 AP011165.faa
+-r--r--r-- 1 pallol staff   19945  8 jun 20.43 AP011166.faa
+-r--r--r-- 1 pallol staff    1166  8 jun 20.43 AP011167.faa
+-r--r--r-- 1 pallol staff     560  8 jun 20.43 AP011168.faa
+-r--r--r-- 1 pallol staff     515  8 jun 20.44 AP011169.faa
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genbank/genomes/Bacteria_DRAFT:
+totalt 64336
+drwxrwxr-x 2 pallol staff  4096 25 maj  2011 Abiotrophia_defectiva_ATCC_49176_uid33011
+drwxrwxr-x 2 pallol staff  4096 27 jun  2011 Acaryochloris_CCMEE_5410_uid16707
+drwxrwxr-x 2 pallol staff  4096 25 maj  2011 Acetivibrio_cellulolyticus_CD2_uid45843
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genbank/genomes/Bacteria_DRAFT/Abiotrophia_defectiva_ATCC_49176_uid33011:
+totalt 1568
+-r--r--r-- 1 pallol staff 672037 21 sep 20.08 ACIN00000000.contig.faa.tgz
+-r--r--r-- 1 pallol staff 670537 21 sep 20.08 ACIN00000000.scaffold.faa.tgz
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genbank/genomes/Bacteria_DRAFT/Acaryochloris_CCMEE_5410_uid16707:
+totalt 0
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genbank/genomes/Bacteria_DRAFT/Acetivibrio_cellulolyticus_CD2_uid45843:
+totalt 1320
+-r--r--r-- 1 pallol staff 1175336 21 nov  2011 AEDB00000000.contig.faa.tgz
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genomes:
+totalt 1176
+drwxrwxr-x 2129 pallol staff 307200 27 sep 04.33 Bacteria
+drwxrwxr-x 1939 pallol staff 278528 27 jun 06.09 Bacteria_DRAFT
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genomes/Bacteria:
+totalt 34040
+drwxrwxr-x 2 pallol staff  4096 24 maj  2011 Acaryochloris_marina_MBIC11017_uid58167
+drwxr-xr-x 2 pallol uppmax 4096 27 mar  2012 Acetobacterium_woodii_DSM_1030_uid88073
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genomes/Bacteria/Acaryochloris_marina_MBIC11017_uid58167:
+totalt 4056
+-r--r--r-- 1 pallol staff 2461787 15 jun 18.16 NC_009925.faa
+-r--r--r-- 1 pallol staff  143650 22 okt  2010 NC_009926.faa
+-r--r--r-- 1 pallol staff  138200 22 okt  2010 NC_009927.faa
+-r--r--r-- 1 pallol staff  102917 22 okt  2010 NC_009928.faa
+-r--r--r-- 1 pallol staff   91526 22 okt  2010 NC_009929.faa
+-r--r--r-- 1 pallol staff   70967 22 okt  2010 NC_009930.faa
+-r--r--r-- 1 pallol staff   65414 22 okt  2010 NC_009931.faa
+-r--r--r-- 1 pallol staff   60636 22 okt  2010 NC_009932.faa
+-r--r--r-- 1 pallol staff   42978 22 okt  2010 NC_009933.faa
+-r--r--r-- 1 pallol staff     885 22 okt  2010 NC_009934.faa
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genomes/Bacteria/Acetobacterium_woodii_DSM_1030_uid88073:
+totalt 1676
+-r--r--r-- 1 pallol uppmax 1471523 28 jun 01.21 NC_016894.faa
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genomes/Bacteria_DRAFT:
+totalt 30992
+drwxrwxr-x 2 pallol staff  4096 24 maj  2011 Abiotrophia_defectiva_ATCC_49176_uid55729
+drwxr-xr-x 2 pallol uppmax 4096 27 dec  2011 Acaryochloris_CCMEE_5410_uid78283
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genomes/Bacteria_DRAFT/Abiotrophia_defectiva_ATCC_49176_uid55729:
+totalt 1568
+-r--r--r-- 1 pallol staff 672574 21 sep 17.41 NZ_ACIN00000000.contig.faa.tgz
+-r--r--r-- 1 pallol staff 671020 21 sep 17.41 NZ_ACIN00000000.scaffold.faa.tgz
+
+/bubo/nobackup/uppnex/reference/Bacteria/ftp.ncbi.nih.gov/genomes/Bacteria_DRAFT/Acaryochloris_CCMEE_5410_uid78283:
+totalt 1688
+-r--r--r-- 1 pallol uppmax 1485530 21 sep 17.41 NZ_AFEJ00000000.contig.faa.tgz
