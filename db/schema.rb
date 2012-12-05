@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121025123751) do
+ActiveRecord::Schema.define(:version => 20121205123255) do
 
   create_table "biodatabase", :primary_key => "biodatabase_id", :default => { :expr => "nextval('biodatabase_biodatabase_id_seq'::regclass)" }, :force => true do |t|
     t.string "name",        :limit => 128, :null => false
@@ -295,10 +295,9 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
 
   create_table "taxon_attributes", :force => true do |t|
     t.integer  "ncbi_taxon_id"
-    t.string   "type"
-    t.string   "value"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "attrs"
   end
 
   create_table "taxon_name", :id => false, :force => true do |t|
