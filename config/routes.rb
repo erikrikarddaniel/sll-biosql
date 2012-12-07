@@ -13,12 +13,12 @@ SllBiosql::Application.routes.draw do
   
   resources :sequenced_genomes
   get "wgs_ncbi_taxon_ids" => "sequenced_genomes#all_ncbi_taxon_ids"
-  get "ncbi_taxon_id2full_taxon_hierarchy" => "sequenced_genomes#ncbi_taxon_id2full_taxon_hierarchy"
   get "gi2ncbi_taxon_id" => "protein_gi_taxons#gi2ncbi_taxon_id"
   resources :taxon_with_names
 
   root to: "static_pages#home"
 
+  get "ncbi_taxon_id2full_taxon_hierarchy" => "static_pages#ncbi_taxon_id2full_taxon_hierarchy"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

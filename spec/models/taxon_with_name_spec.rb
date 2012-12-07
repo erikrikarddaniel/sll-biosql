@@ -30,7 +30,6 @@ describe TaxonWithName do
     @enterophage = TaxonWithName.find_by_scientific_name('Enterobacteria phage PRD1')
     @homo = TaxonWithName.find_by_scientific_name('Homo')
     @hs = TaxonWithName.find_by_scientific_name('Homo sapiens')
-    @hs = TaxonWithName.find_by_scientific_name('Homo sapiens')
     @neanderthal = TaxonWithName.find_by_scientific_name('Homo sapiens neanderthalensis')
   end
 
@@ -47,6 +46,10 @@ describe TaxonWithName do
 
     its(:parent) { should == @homo }
     its(:children) { should == [ @neanderthal ] }
+
+    it "should have an all_up_root method" do
+      @hs.all_up_to_root.map { |t| t.scientific_name }.should == ["Homo sapiens", "Homo", "Homininae", "Hominidae", "Hominoidea", "Catarrhini", "Simiiformes", "Haplorrhini", "Primates", "Euarchontoglires", "Eutheria", "Theria", "Mammalia", "Amniota", "Tetrapoda", "Sarcopterygii", "Euteleostomi", "Teleostomi", "Gnathostomata", "Vertebrata", "Craniata", "Chordata", "Deuterostomia", "Coelomata", "Bilateria", "Eumetazoa", "Metazoa", "Opisthokonta", "Eukaryota", "cellular organisms", "root"]
+    end
   end
 
   describe 'whole genome sequenced' do
