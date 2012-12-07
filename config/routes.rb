@@ -1,4 +1,6 @@
 SllBiosql::Application.routes.draw do
+  resources :functions
+
   resources :organism_group_rows
 
   resources :organism_groups

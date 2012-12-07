@@ -1,0 +1,36 @@
+{
+  "name": "SEED root",
+  "source_db": "SEED",
+  "children": [
+    {
+      "name": "SEED 0",
+      "source_db": "SEED",
+      "children": [
+	{
+	  "name": "SEED 0.0",
+	  "source_db": "SEED",
+	  "children": [
+	    { 
+	      "name": "SEED 0.0.0",
+	      "source_db": "SEED"
+	    },
+	    { 
+	      "name": "SEED 0.0.1",
+	      "source_db": "SEED"
+	    }
+	  ]
+	},
+	{
+	  "name": "SEED 0.1",
+	  "source_db": "SEED",
+	  "children": [
+	    { 
+	      "name": "SEED 0.1.0",
+	      "source_db": "SEED"
+	    }
+	  ]
+	}
+      ]
+    }
+  ]
+}
