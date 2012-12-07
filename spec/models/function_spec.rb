@@ -58,12 +58,13 @@ describe Function do
 
   describe "file import" do
     before do
-      FileParsers.import_functional_hierarchy(fixture_file_upload("/functions.json"))
+      FileParsers.import_functional_hierarchy(fixture_file_upload("/functions0.json"))
+      FileParsers.import_functional_hierarchy(fixture_file_upload("/functions1.json"))
       @all = Function.find_all_by_source_db('SEED')
     end
 
     subject { @all }
 
-    its(:length) { should == 7 }
+    its(:length) { should == 10 }
   end
 end

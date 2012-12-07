@@ -21,14 +21,17 @@ private
       source_db: json['source_db'],
       source_identifier: json['source_identifier']
     }
-    if parent
-      parent = parent.children.create(data)
-    else
-      parent = Function.create(data)
+    current = Function.find_by_name_and_source_db(data[:name], data[:source_db])
+    unless current
+      if parent
+	current = parent.children.create(data)
+      else
+	current = Function.create(data)
+      end
     end
     if json['children']
       json['children'].each do |child|
-	_parse_function_from_json(child, parent)
+	_parse_function_from_json(child, current)
       end
     end
   end
