@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.string "name",        :limit => 128, :null => false
     t.string "authority",   :limit => 128
     t.text   "description"
-    t.index ["name"], :name => "biodatabase_name_key", :unique => true
-    t.index ["authority"], :name => "db_auth"
+    t.index ["name"], :name => "biodatabase_name_key", :unique => true, :order => {"name" => :asc}
+    t.index ["authority"], :name => "db_auth", :order => {"authority" => :asc}
   end
 
   create_table "taxon", :primary_key => "taxon_id", :default => { :expr => "nextval('taxon_taxon_id_seq'::regclass)" }, :force => true do |t|
@@ -29,10 +29,10 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "mito_genetic_code", :limit => 2
     t.integer "left_value"
     t.integer "right_value"
-    t.index ["parent_taxon_id"], :name => "taxparent"
-    t.index ["left_value"], :name => "xaktaxon_left_value", :unique => true
-    t.index ["ncbi_taxon_id"], :name => "xaktaxon_ncbi_taxon_id", :unique => true
-    t.index ["right_value"], :name => "xaktaxon_right_value", :unique => true
+    t.index ["parent_taxon_id"], :name => "taxparent", :order => {"parent_taxon_id" => :asc}
+    t.index ["left_value"], :name => "xaktaxon_left_value", :unique => true, :order => {"left_value" => :asc}
+    t.index ["ncbi_taxon_id"], :name => "xaktaxon_ncbi_taxon_id", :unique => true, :order => {"ncbi_taxon_id" => :asc}
+    t.index ["right_value"], :name => "xaktaxon_right_value", :unique => true, :order => {"right_value" => :asc}
   end
 
   create_table "bioentry", :primary_key => "bioentry_id", :default => { :expr => "nextval('bioentry_bioentry_id_seq'::regclass)" }, :force => true do |t|
@@ -44,28 +44,28 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.string  "division",       :limit => 6
     t.text    "description"
     t.integer "version",                       :null => false
-    t.index ["accession", "biodatabase_id", "version"], :name => "bioentry_accession_biodatabase_id_version_key", :unique => true
-    t.index ["biodatabase_id"], :name => "bioentry_db"
-    t.index ["identifier", "biodatabase_id"], :name => "bioentry_identifier_biodatabase_id_key", :unique => true
-    t.index ["name"], :name => "bioentry_name"
-    t.index ["taxon_id"], :name => "bioentry_tax"
-    t.foreign_key ["taxon_id"], "taxon", ["taxon_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fktaxon_bioentry"
+    t.index ["accession", "biodatabase_id", "version"], :name => "bioentry_accession_biodatabase_id_version_key", :unique => true, :order => {"accession" => :asc, "biodatabase_id" => :asc, "version" => :asc}
+    t.index ["biodatabase_id"], :name => "bioentry_db", :order => {"biodatabase_id" => :asc}
+    t.index ["identifier", "biodatabase_id"], :name => "bioentry_identifier_biodatabase_id_key", :unique => true, :order => {"identifier" => :asc, "biodatabase_id" => :asc}
+    t.index ["name"], :name => "bioentry_name", :order => {"name" => :asc}
+    t.index ["taxon_id"], :name => "bioentry_tax", :order => {"taxon_id" => :asc}
     t.foreign_key ["biodatabase_id"], "biodatabase", ["biodatabase_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkbiodatabase_bioentry"
+    t.foreign_key ["taxon_id"], "taxon", ["taxon_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fktaxon_bioentry"
   end
 
   create_table "dbxref", :primary_key => "dbxref_id", :default => { :expr => "nextval('dbxref_dbxref_id_seq'::regclass)" }, :force => true do |t|
     t.string  "dbname",    :limit => 40,  :null => false
     t.string  "accession", :limit => 128, :null => false
     t.integer "version",                  :null => false
-    t.index ["accession", "dbname", "version"], :name => "dbxref_accession_dbname_version_key", :unique => true
-    t.index ["dbname"], :name => "dbxref_db"
+    t.index ["accession", "dbname", "version"], :name => "dbxref_accession_dbname_version_key", :unique => true, :order => {"accession" => :asc, "dbname" => :asc, "version" => :asc}
+    t.index ["dbname"], :name => "dbxref_db", :order => {"dbname" => :asc}
   end
 
   create_table "bioentry_dbxref", :id => false, :force => true do |t|
     t.integer "bioentry_id", :null => false
     t.integer "dbxref_id",   :null => false
     t.integer "rank"
-    t.index ["dbxref_id"], :name => "dblink_dbx"
+    t.index ["dbxref_id"], :name => "dblink_dbx", :order => {"dbxref_id" => :asc}
     t.foreign_key ["bioentry_id"], "bioentry", ["bioentry_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkbioentry_dblink"
     t.foreign_key ["dbxref_id"], "dbxref", ["dbxref_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkdbxref_dblink"
   end
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
   create_table "ontology", :primary_key => "ontology_id", :default => { :expr => "nextval('ontology_ontology_id_seq'::regclass)" }, :force => true do |t|
     t.string "name",       :limit => 32, :null => false
     t.text   "definition"
-    t.index ["name"], :name => "ontology_name_key", :unique => true
+    t.index ["name"], :name => "ontology_name_key", :unique => true, :order => {"name" => :asc}
   end
 
   create_table "term", :primary_key => "term_id", :default => { :expr => "nextval('term_term_id_seq'::regclass)" }, :force => true do |t|
@@ -82,9 +82,9 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.string  "identifier",  :limit => 40
     t.string  "is_obsolete", :limit => 1
     t.integer "ontology_id",               :null => false
-    t.index ["identifier"], :name => "term_identifier_key", :unique => true
-    t.index ["name", "ontology_id", "is_obsolete"], :name => "term_name_ontology_id_is_obsolete_key", :unique => true
-    t.index ["ontology_id"], :name => "term_ont"
+    t.index ["identifier"], :name => "term_identifier_key", :unique => true, :order => {"identifier" => :asc}
+    t.index ["name", "ontology_id", "is_obsolete"], :name => "term_name_ontology_id_is_obsolete_key", :unique => true, :order => {"name" => :asc, "ontology_id" => :asc, "is_obsolete" => :asc}
+    t.index ["ontology_id"], :name => "term_ont", :order => {"ontology_id" => :asc}
     t.foreign_key ["ontology_id"], "ontology", ["ontology_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkont_term"
   end
 
@@ -93,12 +93,12 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "subject_bioentry_id", :null => false
     t.integer "term_id",             :null => false
     t.integer "distance"
-    t.index ["object_bioentry_id", "subject_bioentry_id", "term_id", "distance"], :name => "bioentry_path_object_bioentry_id_subject_bioentry_id_term_i_key", :unique => true
-    t.index ["subject_bioentry_id"], :name => "bioentrypath_child"
-    t.index ["term_id"], :name => "bioentrypath_trm"
-    t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_bioentrypath"
+    t.index ["object_bioentry_id", "subject_bioentry_id", "term_id", "distance"], :name => "bioentry_path_object_bioentry_id_subject_bioentry_id_term_i_key", :unique => true, :order => {"object_bioentry_id" => :asc, "subject_bioentry_id" => :asc, "term_id" => :asc, "distance" => :asc}
+    t.index ["subject_bioentry_id"], :name => "bioentrypath_child", :order => {"subject_bioentry_id" => :asc}
+    t.index ["term_id"], :name => "bioentrypath_trm", :order => {"term_id" => :asc}
     t.foreign_key ["object_bioentry_id"], "bioentry", ["bioentry_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkparentent_bioentrypath"
     t.foreign_key ["subject_bioentry_id"], "bioentry", ["bioentry_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkchildent_bioentrypath"
+    t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_bioentrypath"
   end
 
   create_table "bioentry_qualifier_value", :id => false, :force => true do |t|
@@ -106,8 +106,8 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "term_id",                    :null => false
     t.text    "value"
     t.integer "rank",        :default => 0, :null => false
-    t.index ["bioentry_id", "term_id", "rank"], :name => "bioentry_qualifier_value_bioentry_id_term_id_rank_key", :unique => true
-    t.index ["term_id"], :name => "bioentryqual_trm"
+    t.index ["bioentry_id", "term_id", "rank"], :name => "bioentry_qualifier_value_bioentry_id_term_id_rank_key", :unique => true, :order => {"bioentry_id" => :asc, "term_id" => :asc, "rank" => :asc}
+    t.index ["term_id"], :name => "bioentryqual_trm", :order => {"term_id" => :asc}
     t.foreign_key ["bioentry_id"], "bioentry", ["bioentry_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkbioentry_entqual"
     t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_entqual"
   end
@@ -118,8 +118,8 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.text    "title"
     t.text    "authors"
     t.string  "crc",       :limit => 32
-    t.index ["crc"], :name => "reference_crc_key", :unique => true
-    t.index ["dbxref_id"], :name => "reference_dbxref_id_key", :unique => true
+    t.index ["crc"], :name => "reference_crc_key", :unique => true, :order => {"crc" => :asc}
+    t.index ["dbxref_id"], :name => "reference_dbxref_id_key", :unique => true, :order => {"dbxref_id" => :asc}
     t.foreign_key ["dbxref_id"], "dbxref", ["dbxref_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkdbxref_reference"
   end
 
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "start_pos"
     t.integer "end_pos"
     t.integer "rank",         :default => 0, :null => false
-    t.index ["reference_id"], :name => "bioentryref_ref"
+    t.index ["reference_id"], :name => "bioentryref_ref", :order => {"reference_id" => :asc}
     t.foreign_key ["bioentry_id"], "bioentry", ["bioentry_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkbioentry_entryref"
     t.foreign_key ["reference_id"], "reference", ["reference_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkreference_entryref"
   end
@@ -139,12 +139,12 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "subject_bioentry_id", :null => false
     t.integer "term_id",             :null => false
     t.integer "rank"
-    t.index ["object_bioentry_id", "subject_bioentry_id", "term_id"], :name => "bioentry_relationship_object_bioentry_id_subject_bioentry_i_key", :unique => true
-    t.index ["subject_bioentry_id"], :name => "bioentryrel_child"
-    t.index ["term_id"], :name => "bioentryrel_trm"
-    t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_bioentryrel"
+    t.index ["object_bioentry_id", "subject_bioentry_id", "term_id"], :name => "bioentry_relationship_object_bioentry_id_subject_bioentry_i_key", :unique => true, :order => {"object_bioentry_id" => :asc, "subject_bioentry_id" => :asc, "term_id" => :asc}
+    t.index ["subject_bioentry_id"], :name => "bioentryrel_child", :order => {"subject_bioentry_id" => :asc}
+    t.index ["term_id"], :name => "bioentryrel_trm", :order => {"term_id" => :asc}
     t.foreign_key ["object_bioentry_id"], "bioentry", ["bioentry_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkparentent_bioentryrel"
     t.foreign_key ["subject_bioentry_id"], "bioentry", ["bioentry_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkchildent_bioentryrel"
+    t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_bioentryrel"
   end
 
   create_table "biosequence", :id => false, :force => true do |t|
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "bioentry_id",                 :null => false
     t.text    "comment_text",                :null => false
     t.integer "rank",         :default => 0, :null => false
-    t.index ["bioentry_id", "rank"], :name => "comment_bioentry_id_rank_key", :unique => true
+    t.index ["bioentry_id", "rank"], :name => "comment_bioentry_id_rank_key", :unique => true, :order => {"bioentry_id" => :asc, "rank" => :asc}
     t.foreign_key ["bioentry_id"], "bioentry", ["bioentry_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkbioentry_comment"
   end
 
@@ -169,10 +169,10 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "term_id",                  :null => false
     t.integer "rank",      :default => 0, :null => false
     t.text    "value"
-    t.index ["dbxref_id"], :name => "dbxrefqual_dbx"
-    t.index ["term_id"], :name => "dbxrefqual_trm"
-    t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fktrm_dbxrefqual"
+    t.index ["dbxref_id"], :name => "dbxrefqual_dbx", :order => {"dbxref_id" => :asc}
+    t.index ["term_id"], :name => "dbxrefqual_trm", :order => {"term_id" => :asc}
     t.foreign_key ["dbxref_id"], "dbxref", ["dbxref_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkdbxref_dbxrefqual"
+    t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fktrm_dbxrefqual"
   end
 
   create_table "fetch_gis", :force => true do |t|
@@ -187,12 +187,12 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "source_term_id",                              :null => false
     t.string  "display_name",   :limit => 64
     t.integer "rank",                         :default => 0, :null => false
-    t.index ["bioentry_id", "type_term_id", "source_term_id", "rank"], :name => "seqfeature_bioentry_id_type_term_id_source_term_id_rank_key", :unique => true
-    t.index ["source_term_id"], :name => "seqfeature_fsrc"
-    t.index ["type_term_id"], :name => "seqfeature_trm"
-    t.foreign_key ["type_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_seqfeature"
-    t.foreign_key ["source_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fksourceterm_seqfeature"
+    t.index ["bioentry_id", "type_term_id", "source_term_id", "rank"], :name => "seqfeature_bioentry_id_type_term_id_source_term_id_rank_key", :unique => true, :order => {"bioentry_id" => :asc, "type_term_id" => :asc, "source_term_id" => :asc, "rank" => :asc}
+    t.index ["source_term_id"], :name => "seqfeature_fsrc", :order => {"source_term_id" => :asc}
+    t.index ["type_term_id"], :name => "seqfeature_trm", :order => {"type_term_id" => :asc}
     t.foreign_key ["bioentry_id"], "bioentry", ["bioentry_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkbioentry_seqfeature"
+    t.foreign_key ["source_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fksourceterm_seqfeature"
+    t.foreign_key ["type_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_seqfeature"
   end
 
   create_table "location", :primary_key => "location_id", :default => { :expr => "nextval('location_location_id_seq'::regclass)" }, :force => true do |t|
@@ -203,12 +203,12 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "end_pos"
     t.integer "strand",        :default => 0, :null => false
     t.integer "rank",          :default => 0, :null => false
-    t.index ["seqfeature_id", "rank"], :name => "location_seqfeature_id_rank_key", :unique => true
-    t.index ["dbxref_id"], :name => "seqfeatureloc_dbx"
-    t.index ["start_pos", "end_pos"], :name => "seqfeatureloc_start"
-    t.index ["term_id"], :name => "seqfeatureloc_trm"
-    t.foreign_key ["seqfeature_id"], "seqfeature", ["seqfeature_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkseqfeature_location"
+    t.index ["seqfeature_id", "rank"], :name => "location_seqfeature_id_rank_key", :unique => true, :order => {"seqfeature_id" => :asc, "rank" => :asc}
+    t.index ["dbxref_id"], :name => "seqfeatureloc_dbx", :order => {"dbxref_id" => :asc}
+    t.index ["start_pos", "end_pos"], :name => "seqfeatureloc_start", :order => {"start_pos" => :asc, "end_pos" => :asc}
+    t.index ["term_id"], :name => "seqfeatureloc_trm", :order => {"term_id" => :asc}
     t.foreign_key ["dbxref_id"], "dbxref", ["dbxref_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkdbxref_location"
+    t.foreign_key ["seqfeature_id"], "seqfeature", ["seqfeature_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkseqfeature_location"
     t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_featloc"
   end
 
@@ -217,7 +217,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "term_id",     :null => false
     t.string  "value",       :null => false
     t.integer "int_value"
-    t.index ["term_id"], :name => "locationqual_trm"
+    t.index ["term_id"], :name => "locationqual_trm", :order => {"term_id" => :asc}
     t.foreign_key ["location_id"], "location", ["location_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkfeatloc_locqual"
     t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_locqual"
   end
@@ -236,7 +236,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.text     "source_id"
-    t.index ["organism_group_id"], :name => "index_organism_group_rows_on_organism_group_id"
+    t.index ["organism_group_id"], :name => "index_organism_group_rows_on_organism_group_id", :order => {"organism_group_id" => :asc}
     t.foreign_key ["organism_group_id"], "organism_groups", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "organism_group_rows_organism_group_id_fkey"
   end
 
@@ -248,9 +248,9 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "seqfeature_id", :null => false
     t.integer "dbxref_id",     :null => false
     t.integer "rank"
-    t.index ["dbxref_id"], :name => "feadblink_dbx"
-    t.foreign_key ["seqfeature_id"], "seqfeature", ["seqfeature_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkseqfeature_feadblink"
+    t.index ["dbxref_id"], :name => "feadblink_dbx", :order => {"dbxref_id" => :asc}
     t.foreign_key ["dbxref_id"], "dbxref", ["dbxref_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkdbxref_feadblink"
+    t.foreign_key ["seqfeature_id"], "seqfeature", ["seqfeature_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkseqfeature_feadblink"
   end
 
   create_table "seqfeature_path", :id => false, :force => true do |t|
@@ -258,12 +258,12 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "subject_seqfeature_id", :null => false
     t.integer "term_id",               :null => false
     t.integer "distance"
-    t.index ["object_seqfeature_id", "subject_seqfeature_id", "term_id", "distance"], :name => "seqfeature_path_object_seqfeature_id_subject_seqfeature_id__key", :unique => true
-    t.index ["subject_seqfeature_id"], :name => "seqfeaturepath_child"
-    t.index ["term_id"], :name => "seqfeaturepath_trm"
-    t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_seqfeatpath"
+    t.index ["object_seqfeature_id", "subject_seqfeature_id", "term_id", "distance"], :name => "seqfeature_path_object_seqfeature_id_subject_seqfeature_id__key", :unique => true, :order => {"object_seqfeature_id" => :asc, "subject_seqfeature_id" => :asc, "term_id" => :asc, "distance" => :asc}
+    t.index ["subject_seqfeature_id"], :name => "seqfeaturepath_child", :order => {"subject_seqfeature_id" => :asc}
+    t.index ["term_id"], :name => "seqfeaturepath_trm", :order => {"term_id" => :asc}
     t.foreign_key ["object_seqfeature_id"], "seqfeature", ["seqfeature_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkparentfeat_seqfeatpath"
     t.foreign_key ["subject_seqfeature_id"], "seqfeature", ["seqfeature_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkchildfeat_seqfeatpath"
+    t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_seqfeatpath"
   end
 
   create_table "seqfeature_qualifier_value", :id => false, :force => true do |t|
@@ -271,9 +271,9 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "term_id",                      :null => false
     t.integer "rank",          :default => 0, :null => false
     t.text    "value",                        :null => false
-    t.index ["term_id"], :name => "seqfeaturequal_trm"
-    t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_featqual"
+    t.index ["term_id"], :name => "seqfeaturequal_trm", :order => {"term_id" => :asc}
     t.foreign_key ["seqfeature_id"], "seqfeature", ["seqfeature_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkseqfeature_featqual"
+    t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_featqual"
   end
 
   create_table "seqfeature_relationship", :primary_key => "seqfeature_relationship_id", :default => { :expr => "nextval('seqfeature_relationship_seqfeature_relationship_id_seq'::regclass)" }, :force => true do |t|
@@ -281,12 +281,12 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "subject_seqfeature_id", :null => false
     t.integer "term_id",               :null => false
     t.integer "rank"
-    t.index ["object_seqfeature_id", "subject_seqfeature_id", "term_id"], :name => "seqfeature_relationship_object_seqfeature_id_subject_seqfea_key", :unique => true
-    t.index ["subject_seqfeature_id"], :name => "seqfeaturerel_child"
-    t.index ["term_id"], :name => "seqfeaturerel_trm"
-    t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_seqfeatrel"
+    t.index ["object_seqfeature_id", "subject_seqfeature_id", "term_id"], :name => "seqfeature_relationship_object_seqfeature_id_subject_seqfea_key", :unique => true, :order => {"object_seqfeature_id" => :asc, "subject_seqfeature_id" => :asc, "term_id" => :asc}
+    t.index ["subject_seqfeature_id"], :name => "seqfeaturerel_child", :order => {"subject_seqfeature_id" => :asc}
+    t.index ["term_id"], :name => "seqfeaturerel_trm", :order => {"term_id" => :asc}
     t.foreign_key ["object_seqfeature_id"], "seqfeature", ["seqfeature_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkparentfeat_seqfeatrel"
     t.foreign_key ["subject_seqfeature_id"], "seqfeature", ["seqfeature_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkchildfeat_seqfeatrel"
+    t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_seqfeatrel"
   end
 
   create_table "sequenced_genomes", :id => false, :force => true do |t|
@@ -306,9 +306,9 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "taxon_id",                 :null => false
     t.string  "name",                     :null => false
     t.string  "name_class", :limit => 32, :null => false
-    t.index ["name"], :name => "taxnamename"
-    t.index ["taxon_id"], :name => "taxnametaxonid"
-    t.index ["name", "name_class", "taxon_id"], :name => "taxon_name_name_name_class_taxon_id_key", :unique => true
+    t.index ["name"], :name => "taxnamename", :order => {"name" => :asc}
+    t.index ["taxon_id"], :name => "taxnametaxonid", :order => {"taxon_id" => :asc}
+    t.index ["name", "name_class", "taxon_id"], :name => "taxon_name_name_name_class_taxon_id_key", :unique => true, :order => {"name" => :asc, "name_class" => :asc, "taxon_id" => :asc}
     t.foreign_key ["taxon_id"], "taxon", ["taxon_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktaxon_taxonname"
   end
 
@@ -317,7 +317,7 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "term_id",   :null => false
     t.integer "dbxref_id", :null => false
     t.integer "rank"
-    t.index ["dbxref_id"], :name => "trmdbxref_dbxrefid"
+    t.index ["dbxref_id"], :name => "trmdbxref_dbxrefid", :order => {"dbxref_id" => :asc}
     t.foreign_key ["dbxref_id"], "dbxref", ["dbxref_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkdbxref_trmdbxref"
     t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkterm_trmdbxref"
   end
@@ -328,14 +328,14 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "object_term_id",    :null => false
     t.integer "ontology_id",       :null => false
     t.integer "distance"
-    t.index ["subject_term_id", "predicate_term_id", "object_term_id", "ontology_id", "distance"], :name => "term_path_subject_term_id_predicate_term_id_object_term_id__key", :unique => true
-    t.index ["object_term_id"], :name => "trmpath_objectid"
-    t.index ["ontology_id"], :name => "trmpath_ontid"
-    t.index ["predicate_term_id"], :name => "trmpath_predicateid"
-    t.foreign_key ["subject_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktrmsubject_trmpath"
-    t.foreign_key ["predicate_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktrmpredicate_trmpath"
+    t.index ["subject_term_id", "predicate_term_id", "object_term_id", "ontology_id", "distance"], :name => "term_path_subject_term_id_predicate_term_id_object_term_id__key", :unique => true, :order => {"subject_term_id" => :asc, "predicate_term_id" => :asc, "object_term_id" => :asc, "ontology_id" => :asc, "distance" => :asc}
+    t.index ["object_term_id"], :name => "trmpath_objectid", :order => {"object_term_id" => :asc}
+    t.index ["ontology_id"], :name => "trmpath_ontid", :order => {"ontology_id" => :asc}
+    t.index ["predicate_term_id"], :name => "trmpath_predicateid", :order => {"predicate_term_id" => :asc}
     t.foreign_key ["object_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktrmobject_trmpath"
     t.foreign_key ["ontology_id"], "ontology", ["ontology_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkontology_trmpath"
+    t.foreign_key ["predicate_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktrmpredicate_trmpath"
+    t.foreign_key ["subject_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktrmsubject_trmpath"
   end
 
   create_table "term_relationship", :primary_key => "term_relationship_id", :default => { :expr => "nextval('term_relationship_term_relationship_id_seq'::regclass)" }, :force => true do |t|
@@ -343,22 +343,22 @@ ActiveRecord::Schema.define(:version => 20121025123751) do
     t.integer "predicate_term_id", :null => false
     t.integer "object_term_id",    :null => false
     t.integer "ontology_id",       :null => false
-    t.index ["subject_term_id", "predicate_term_id", "object_term_id", "ontology_id"], :name => "term_relationship_subject_term_id_predicate_term_id_object__key", :unique => true
-    t.index ["object_term_id"], :name => "trmrel_objectid"
-    t.index ["ontology_id"], :name => "trmrel_ontid"
-    t.index ["predicate_term_id"], :name => "trmrel_predicateid"
-    t.foreign_key ["subject_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktrmsubject_trmrel"
-    t.foreign_key ["predicate_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktrmpredicate_trmrel"
+    t.index ["subject_term_id", "predicate_term_id", "object_term_id", "ontology_id"], :name => "term_relationship_subject_term_id_predicate_term_id_object__key", :unique => true, :order => {"subject_term_id" => :asc, "predicate_term_id" => :asc, "object_term_id" => :asc, "ontology_id" => :asc}
+    t.index ["object_term_id"], :name => "trmrel_objectid", :order => {"object_term_id" => :asc}
+    t.index ["ontology_id"], :name => "trmrel_ontid", :order => {"ontology_id" => :asc}
+    t.index ["predicate_term_id"], :name => "trmrel_predicateid", :order => {"predicate_term_id" => :asc}
     t.foreign_key ["object_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktrmobject_trmrel"
     t.foreign_key ["ontology_id"], "ontology", ["ontology_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fkontology_trmrel"
+    t.foreign_key ["predicate_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktrmpredicate_trmrel"
+    t.foreign_key ["subject_term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktrmsubject_trmrel"
   end
 
   create_table "term_relationship_term", :id => false, :force => true do |t|
     t.integer "term_relationship_id", :null => false
     t.integer "term_id",              :null => false
-    t.index ["term_id"], :name => "term_relationship_term_term_id_key", :unique => true
-    t.foreign_key ["term_relationship_id"], "term_relationship", ["term_relationship_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktrmrel_trmreltrm"
+    t.index ["term_id"], :name => "term_relationship_term_term_id_key", :unique => true, :order => {"term_id" => :asc}
     t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktrm_trmreltrm"
+    t.foreign_key ["term_relationship_id"], "term_relationship", ["term_relationship_id"], :on_update => :no_action, :on_delete => :cascade, :name => "fktrmrel_trmreltrm"
   end
 
   create_table "term_synonym", :id => false, :force => true do |t|
