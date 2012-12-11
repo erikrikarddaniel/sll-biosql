@@ -1,0 +1,11 @@
+#Datasets	 KB1	 KB2	 NB1	 NB2
+SEED;Carbohydrates;Monosaccharides;Mannose_Metabolism;Mannose-6-phosphate isomerase (EC 5.3.1.8);Mannose-6-phosphate isomerase (EC 5.3.1.8)	 0	 1	 10	 4
+SEED;Carbohydrates;Monosaccharides;Mannose_Metabolism;Phosphomannomutase (EC 5.4.2.8);Phosphomannomutase (EC 5.4.2.8)	 31	 22	 47	 56
+SEED;Carbohydrates;Monosaccharides;Mannose_Metabolism;Mannose-1-phosphate guanylyltransferase (GDP) (EC 2.7.7.22);Mannose-1-phosphate guanylyltransferase (GDP) (EC 2.7.7.22)	 78	 50	 94	 81
+SEED;Carbohydrates;Monosaccharides;Mannose_Metabolism;Mannose-1-phosphate guanylyltransferase (EC 2.7.7.13 );Mannose-1-phosphate guanylyltransferase (EC 2.7.7.13 )	 0	 0	 0	 2
+SEED;Carbohydrates;Monosaccharides;Mannose_Metabolism;GDP-mannose mannosyl hydrolase (EC 3.6.1.-);GDP-mannose mannosyl hydrolase (EC 3.6.1.-)	 12	 1	 7	 0
+SEED;Carbohydrates;Monosaccharides;Mannose_Metabolism;Alpha-1,2-mannosidase;Alpha-1,2-mannosidase	 1	 1	 10	 12
+SEED;Carbohydrates;Monosaccharides;Mannose_Metabolism;Predicted sodium-dependent mannose transporter;Predicted sodium-dependent mannose transporter	 0	 0	 1	 0
+SEED;Carbohydrates;Monosaccharides;D-Sorbitol(D-Glucitol)_and_L-Sorbose_Utilization;Sorbitol-6-phosphate 2-dehydrogenase (EC 1.1.1.140);Sorbitol-6-phosphate 2-dehydrogenase (EC 1.1.1.140)	 0	 0	 7	 4
+SEED;Carbohydrates;Monosaccharides;D-Sorbitol(D-Glucitol)_and_L-Sorbose_Utilization;Glucitol operon repressor;Glucitol operon repressor	 42	 42	 16	 15
+SEED;Carbohydrates;Monosaccharides;D-galactonate_catabolism;Galactonate dehydratase (EC 4.2.1.6);Galactonate dehydratase (EC 4.2.1.6)	 1	 7	 15	 13

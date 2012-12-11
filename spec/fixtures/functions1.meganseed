@@ -1,0 +1,16 @@
+#Datasets	 KB1	 KB2	 NB1	 NB2
+SEED;Carbohydrates;Monosaccharides;Mannose_Metabolism;GDP-mannose mannosyl hydrolase (EC 3.6.1.-);GDP-mannose mannosyl hydrolase (EC 3.6.1.-)	 12	 1	 7	 0
+SEED;Carbohydrates;Monosaccharides;Mannose_Metabolism;Alpha-1,2-mannosidase;Alpha-1,2-mannosidase	 1	 1	 10	 12
+SEED;Carbohydrates;Monosaccharides;Mannose_Metabolism;Predicted sodium-dependent mannose transporter;Predicted sodium-dependent mannose transporter	 0	 0	 1	 0
+SEED;Carbohydrates;Monosaccharides;D-Sorbitol(D-Glucitol)_and_L-Sorbose_Utilization;Sorbitol-6-phosphate 2-dehydrogenase (EC 1.1.1.140);Sorbitol-6-phosphate 2-dehydrogenase (EC 1.1.1.140)	 0	 0	 7	 4
+SEED;Carbohydrates;Monosaccharides;D-Sorbitol(D-Glucitol)_and_L-Sorbose_Utilization;Glucitol operon repressor;Glucitol operon repressor	 42	 42	 16	 15
+SEED;Carbohydrates;Monosaccharides;D-galactonate_catabolism;Galactonate dehydratase (EC 4.2.1.6);Galactonate dehydratase (EC 4.2.1.6)	 1	 7	 15	 13
+SEED;Carbohydrates;Monosaccharides;D-galactonate_catabolism;2-dehydro-3-deoxygalactonokinase (EC 2.7.1.58);2-dehydro-3-deoxygalactonokinase (EC 2.7.1.58)	 0	 2	 2	 4
+SEED;Carbohydrates;Monosaccharides;D-galactonate_catabolism;2-dehydro-3-deoxyphosphogalactonate aldolase (EC 4.1.2.21);2-dehydro-3-deoxyphosphogalactonate aldolase (EC 4.1.2.21)	 1	 0	 4	 2
+SEED;Carbohydrates;Monosaccharides;Hexose_Phosphate_Uptake_System;Sensor histidine protein kinase UhpB, glucose-6-phosphate specific (EC 2.7.13.3);Sensor histidine protein kinase UhpB, glucose-6-phosphate specific (EC 2.7.13.3)	 18	 11	 19	 15
+SEED;Carbohydrates;Monosaccharides;Hexose_Phosphate_Uptake_System;Transcriptional regulatory protein UhpA;Transcriptional regulatory protein UhpA	 7	 5	 32	 10
+SEED;Carbohydrates;Monosaccharides;Hexose_Phosphate_Uptake_System;Predicted glucose transporter in maltodextrin utilization gene cluster;Predicted glucose transporter in maltodextrin utilization gene cluster	 12	 10	 1	 2
+SEED;Carbohydrates;Monosaccharides;Hexose_Phosphate_Uptake_System;Predicted glucose transporter in b-glucoside utilization gene cluster;Predicted glucose transporter in b-glucoside utilization gene cluster	 106	 64	 39	 20
+SEED;Carbohydrates;Monosaccharides;Hexose_Phosphate_Uptake_System;Homolog of fucose/glucose/galactose permeases;Homolog of fucose/glucose/galactose permeases	 1	 2	 34	 8
+SEED;Carbohydrates;Monosaccharides;L-rhamnose_utilization;Predicted L-rhamnose ABC transporter, substrate-binding component;Predicted L-rhamnose ABC transporter, substrate-binding component	 1	 1	 5	 3
+SEED;Carbohydrates;Monosaccharides;L-rhamnose_utilization;L-rhamnose operon regulatory protein RhaS;L-rhamnose operon regulatory protein RhaS	 0	 0	 3	 1

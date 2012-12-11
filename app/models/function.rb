@@ -16,4 +16,12 @@ class Function < ActiveRecord::Base
   belongs_to :parent, :class_name => "Function", :foreign_key => "parent_id"
   has_many :children, :class_name => "Function", :foreign_key => "parent_id"
   validates :name, presence: true, uniqueness: { scope: :source_db }
+
+  def hierarchy
+    parent_id ? "#{parent.hierarchy}:#{name}" : name
+  end
+
+  def root
+    parent_id ? parent.root : self
+  end
 end
