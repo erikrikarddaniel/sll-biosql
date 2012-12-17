@@ -23,4 +23,20 @@ FactoryGirl.define do
     name	'wgs_test_10'
     test	true
   end
+
+  factory :function do
+    name	'test function'
+    source_db	'test source'
+  end
+
+  factory :seed_root, class: "Function" do
+    name	'SEED'
+    source_db	'SEED'
+  end
+
+  factory :seed_child0, class: "Function" do
+    name	'child0'
+    source_db	'SEED'
+    parent	{ FactoryGirl.create(:seed_root) }
+  end
 end

@@ -27,7 +27,7 @@ module FileParsers
 	  if f = Function.find_by_name_and_source_db(func, funcs[0])
 	    p = f
 	  else
-	    p = Function.create!(name: func, source_db: funcs[0], parent_id: ( p ? p.id : nil ))
+	    p = Function.create(name: func, source_db: funcs[0], parent_id: ( p ? p.id : nil ))
 	  end
 	end
       end

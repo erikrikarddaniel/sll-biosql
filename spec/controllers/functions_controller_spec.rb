@@ -19,6 +19,9 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe FunctionsController do
+  before do
+    @seed_child0 = FactoryGirl.create(:seed_child0)
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Function. As you add validations to Function, be sure to
@@ -36,19 +39,19 @@ describe FunctionsController do
     {}
   end
 
-  describe "GET index" do
-    it "assigns all functions as @functions" do
-      function = Function.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:functions).should eq([function])
-    end
-  end
+  # This should really return a 'not found'
+#  describe "GET index" do
+#    it "assigns all functions as @functions" do
+#      function = Function.create! valid_attributes
+#      get :index, {}, valid_session
+#      assigns(:functions).should eq([function])
+#    end
+#  end
 
   describe "GET show" do
     it "assigns the requested function as @function" do
-      function = Function.create! valid_attributes
-      get :show, {:id => function.to_param}, valid_session
-      assigns(:function).should eq(function)
+      get :show, {:id => @seed_child0.to_param}, valid_session
+      assigns(:function).should eq(@seed_child0)
     end
   end
 
