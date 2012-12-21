@@ -18,7 +18,7 @@ SllBiosql::Application.routes.draw do
 
   root to: "static_pages#home"
 
-  get "ncbi_taxon_id2full_taxon_hierarchy" => "static_pages#ncbi_taxon_id2full_taxon_hierarchy"
+  get "ncbi_taxon_id2full_taxon_hierarchy" => "taxon_with_names#ncbi_taxon_id2full_taxon_hierarchy"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

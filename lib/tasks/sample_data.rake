@@ -10,6 +10,7 @@ namespace :db do
     functions
   end
 
+  desc "Fill test data with non-Rails data"
   task populate_test: :environment do
     Rake::Task['db:truncate'].invoke
     insert_non_rails_testdata
