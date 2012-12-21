@@ -55,6 +55,16 @@ describe FunctionsController do
     end
   end
 
+  describe "GET hierarchy as json" do
+    it "returns a json representation successfully" do
+      get :functional_hierarchy, { source_db: "SEED", name: "child0", format: "json" }, valid_session
+      response.should be_success
+      entries = JSON.parse(response.body)
+      entries.length.should == 2
+      entries[0]['name'].should == @seed_child0.name
+    end
+  end
+
   describe "GET new" do
     it "assigns a new function as @function" do
       get :new, {}, valid_session

@@ -8,10 +8,16 @@ describe TaxonWithNamesController do
     {}
   end
   
-  describe "GET hierarchy" do
+  describe "GET ncbi_taxon_id2full_taxon_hierarchy" do
     it "returns a json representation of a taxons full hierarchy" do
       get :ncbi_taxon_id2full_taxon_hierarchy, { ncbi_taxon_id: 83334, format: 'json' }, valid_session
       response.should be_success
+      entries = JSON.parse(response.body)
+      entries.length.should == 10
+      entries[0]['scientific_name'].should == 'Escherichia coli O157:H7'
+      entries[1]['scientific_name'].should == 'Escherichia coli'
+      entries[2]['scientific_name'].should == 'Escherichia'
+      entries[3]['scientific_name'].should == 'Enterobacteriaceae'
     end
   end
 end

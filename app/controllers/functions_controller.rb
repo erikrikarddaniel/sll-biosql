@@ -21,6 +21,21 @@ class FunctionsController < ApplicationController
     end
   end
 
+  # GET /functions/hierarchy/?source_db=SEED&name=Function
+  # GET /functions/1.json
+  def functional_hierarchy
+    qparams = { 
+      source_db: params[:source_db],
+      name: params[:name]
+    }
+    @hierarchy = Function.where(qparams).first.full_hierarchy
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @hierarchy }
+    end
+  end
+
   # GET /functions/new
   # GET /functions/new.json
   def new

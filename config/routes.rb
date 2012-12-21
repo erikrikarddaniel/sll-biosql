@@ -1,5 +1,6 @@
 SllBiosql::Application.routes.draw do
   resources :functions
+  get "functional_hierarchy" => "functions#functional_hierarchy"
 
   resources :organism_group_rows
 

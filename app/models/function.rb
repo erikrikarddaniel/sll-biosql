@@ -17,6 +17,10 @@ class Function < ActiveRecord::Base
   has_many :children, :class_name => "Function", :foreign_key => "parent_id"
   validates :name, presence: true, uniqueness: { scope: :source_db }
 
+  def full_hierarchy
+    parent_id ? [ self ] + parent.full_hierarchy : [ self ]
+  end
+
   def hierarchy
     parent_id ? "#{parent.hierarchy}:#{name}" : name
   end

@@ -48,6 +48,7 @@ describe Function do
 
   subject { @child0 }
 
+  it { should respond_to(:full_hierarchy) }
   it { should respond_to(:hierarchy) }
   it { should respond_to(:name) }
   it { should respond_to(:source_db) }
@@ -66,11 +67,12 @@ describe Function do
     it { should_not be_valid }
   end
 
-  describe "hierarchy and root function" do
+  describe "full_hierarchy, hierarchy and root functions" do
     subject { @child01 }
 
     its(:root) { should == @root }
     its(:hierarchy) { should == [@root, @child0, @child01].map { |n| n.name }.join(":") }
+    its(:full_hierarchy) { should == [ @child01, @child0, @root ] }
   end
 
   describe "name is unique for its source_db" do
