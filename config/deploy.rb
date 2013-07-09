@@ -24,7 +24,7 @@ role :db, "biosql.scilifelab.se", :primary => true
 # Git repository stuff
 set :scm, :git
 set :repository, "https://github.com/erikrikarddaniel/sll-biosql.git"
-set :branch, "master"
+set :branch, "stable"
 set :git_enable_submodules, 1
 
 # tasks

@@ -25,7 +25,7 @@ class ProteinGiTaxonsController < ApplicationController
   def gi2ncbi_taxon_id
     @protein_gi_taxon = ProteinGiTaxon.find(params[:gi])
     respond_to do |format|
-      format.json { render json: @protein_gi_taxon.taxon_id }
+      format.json { render json: @protein_gi_taxon }
     end
   end
 end
