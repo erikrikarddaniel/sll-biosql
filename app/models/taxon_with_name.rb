@@ -26,6 +26,10 @@ class TaxonWithName < ActiveRecord::Base
   def TaxonWithName.root
     TaxonWithName.where('taxon_id = parent_taxon_id').first
   end
+
+  def TaxonWithName.from_synonym(name)
+    TaxonWithName.where("taxon_id = ( SELECT taxon_id FROM taxon_name WHERE name = '#{name}' )").first
+  end
   
   def all_up_to_root
     all_up_to_root_rec(self, [])

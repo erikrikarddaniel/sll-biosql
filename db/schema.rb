@@ -300,9 +300,8 @@ ActiveRecord::Schema.define(:version => 20121207093836) do
     t.foreign_key ["term_id"], "term", ["term_id"], :on_update => :no_action, :on_delete => :no_action, :name => "fkterm_seqfeatrel"
   end
 
-  create_table "sequenced_genomes", :id => false, :force => true do |t|
-    t.integer "ncbi_taxon_id",                    :null => false
-    t.boolean "wgs",           :default => false, :null => false
+  create_table "sequenced_genomes", :primary_key => "ncbi_taxon_id", :default => { :expr => "nextval('sequenced_genomes_ncbi_taxon_id_seq'::regclass)" }, :force => true do |t|
+    t.boolean "wgs"
   end
 
   create_table "taxon_attributes", :force => true do |t|
