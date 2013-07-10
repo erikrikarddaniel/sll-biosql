@@ -20,4 +20,11 @@ describe TaxonWithNamesController do
       entries[3]['scientific_name'].should == 'Enterobacteriaceae'
     end
   end
+
+  describe "GET ncbi_taxon_id2full_taxon_hierarchy from name" do
+    it "returns a json representation of a taxons full hierarchy" do
+      get :ncbi_taxon_id2full_taxon_hierarchy, { name: 'Escherichia coli O157:H7', format: 'json' }, valid_session
+      response.should be_success
+    end
+  end
 end

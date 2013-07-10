@@ -63,4 +63,10 @@ describe TaxonWithName do
     it { should include @enterophage }
     it { should_not include @bacteria }
   end
+
+  describe 'Synonyms' do
+    it "should return an identical object from a synonym" do
+      TaxonWithName.from_synonym('Homo neanderthalensis').should == @neanderthal
+    end
+  end
 end
