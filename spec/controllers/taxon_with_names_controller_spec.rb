@@ -23,19 +23,21 @@ describe TaxonWithNamesController do
 
   describe "GET ncbi_taxon_ids2full_taxon_hierarchies" do
     it "returns a list of json representations of taxons full hierarchies" do
-      get :ncbi_taxon_ids2full_taxon_hierarchies, { ncbi_taxon_id: [83334,63221], format: 'json' }, valid_session
+      get :ncbi_taxon_ids2full_taxon_hierarchies, { ncbi_taxon_ids: [83334,63221], format: 'json' }, valid_session
       response.should be_success
       entries = JSON.parse(response.body)
       entries.should be_a(Array)
       entries.length.should == 2
-      entries[0][0]['scientific_name'].should == 'Escherichia coli O157:H7'
-      entries[0][1]['scientific_name'].should == 'Escherichia coli'
-      entries[0][2]['scientific_name'].should == 'Escherichia'
-      entries[0][3]['scientific_name'].should == 'Enterobacteriaceae'
-      entries[1][0]['scientific_name'].should == 'Homo sapiens neanderthalensis'
-      entries[2][1]['scientific_name'].should == 'Homo sapiens'
-      entries[3][2]['scientific_name'].should == 'Homo'
-      entries[4][3]['scientific_name'].should == 'Homininae'
+      entries_first = entries[0]
+      entries_second = entries[1]
+      entries_first[0]['scientific_name'].should == 'Escherichia coli O157:H7'
+      entries_first[1]['scientific_name'].should == 'Escherichia coli'
+      entries_first[2]['scientific_name'].should == 'Escherichia'
+      entries_first[3]['scientific_name'].should == 'Enterobacteriaceae'
+      entries_second[0]['scientific_name'].should == 'Homo sapiens neanderthalensis'
+      entries_second[1]['scientific_name'].should == 'Homo sapiens'
+      entries_second[2]['scientific_name'].should == 'Homo'
+      entries_second[3]['scientific_name'].should == 'Homininae'
     end
   end
   describe "GET ncbi_taxon_id2full_taxon_hierarchy from name" do

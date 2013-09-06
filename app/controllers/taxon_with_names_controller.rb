@@ -40,4 +40,19 @@ class TaxonWithNamesController < ApplicationController
       format.json {render json: @hierarchy }
     end      
   end
+  # GET /ncbi_taxon_ids2full_taxon_hierarchies
+  def ncbi_taxon_ids2full_taxon_hierarchies
+    if params[:ncbi_taxon_ids]
+      @taxons = TaxonWithName.where(ncbi_taxon_id: params[:ncbi_taxon_ids])
+#    elsif params[:name]
+#      @taxon = TaxonWithName.from_synonym(params[:name])
+    end
+    @hierarchies = []
+    @taxons.each do |taxon|
+      @hierarchies << taxon.all_up_to_root
+    end  
+    respond_to do |format|
+      format.json {render json: @hierarchies }
+    end      
+  end
 end
