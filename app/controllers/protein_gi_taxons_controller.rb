@@ -28,4 +28,12 @@ class ProteinGiTaxonsController < ApplicationController
       format.json { render json: @protein_gi_taxon }
     end
   end
+
+  # GET /gis2ncbi_taxon_ids.json
+  def gis2ncbi_taxon_ids
+    @protein_gis_taxons = ProteinGiTaxon.find(params[:gis])
+    respond_to do |format|
+      format.json { render json: @protein_gis_taxons }
+    end
+  end
 end

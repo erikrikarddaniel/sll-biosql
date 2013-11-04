@@ -15,6 +15,7 @@ SllBiosql::Application.routes.draw do
   resources :sequenced_genomes
   get "wgs_ncbi_taxon_ids" => "sequenced_genomes#all_ncbi_taxon_ids"
   get "gi2ncbi_taxon_id" => "protein_gi_taxons#gi2ncbi_taxon_id"
+  get "gis2ncbi_taxon_ids" => "protein_gi_taxons#gis2ncbi_taxon_ids"
   resources :taxon_with_names
 
   root to: "static_pages#home"
