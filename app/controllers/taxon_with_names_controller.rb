@@ -55,4 +55,17 @@ class TaxonWithNamesController < ApplicationController
       format.json {render json: @hierarchies }
     end      
   end
+  # GET /organism_group_name2full_taxon_hierarchies/?name=nnn
+  def organism_group_name2full_taxon_hierarchies
+    @organism_group = OrganismGroup.find_by_name(params[:name])
+    ncbi_taxons = @organism_group.map {|o| o.ncbi_taxon_id}
+    @taxons = TaxonWithName.where(ncbi_taxon_id: ncbi_taxons)
+    @hierarchies = []
+    @taxons.each do |taxon|
+      @hierarchies << taxon.all_up_to_root
+    end
+    respond_to do |format|
+      format.json { render json: @hierarchies }
+    end
+  end
 end
