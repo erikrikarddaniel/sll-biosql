@@ -22,7 +22,7 @@ SllBiosql::Application.routes.draw do
 
   get "ncbi_taxon_id2full_taxon_hierarchy" => "taxon_with_names#ncbi_taxon_id2full_taxon_hierarchy"
   get "ncbi_taxon_ids2full_taxon_hierarchies" => "taxon_with_names#ncbi_taxon_ids2full_taxon_hierarchies"
-  get "organism_group_name2full_taxon_hierarchies" => "taxon_with_names#organism_group_name2full_taxon_hierarchies"
+  get "organism_group_name2full_taxon_hierarchies/:name" => "taxon_with_names#organism_group_name2full_taxon_hierarchies"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
