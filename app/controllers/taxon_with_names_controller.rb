@@ -71,8 +71,8 @@ class TaxonWithNamesController < ApplicationController
 
   # GET /gis2taxa
   def gis2taxa
-    @protein_gis_taxons = ProteinGiTaxon.where(protein_gi: Set.new(params[:gis]))
-    ncbi_taxons = Set.new(@protein_gis_taxons.map { |p| p["taxon_id"]})
+    @protein_gis_taxons = ProteinGiTaxon.where(protein_gi: Set.new(params[:gis]).to_a)
+    ncbi_taxons = Set.new(@protein_gis_taxons.map { |p| p["taxon_id"]}).to_a
     @taxons = TaxonWithName.where(ncbi_taxon_id: ncbi_taxons)
     @hierarchies = []
     @taxons.each do |taxon|
