@@ -77,7 +77,7 @@ class TaxonWithNamesController < ApplicationController
 #    @hierarchies = []
 #    @taxons.each do |taxon|
 #      @hierarchies << taxon.all_up_to_root
-    end
+#    end
     respond_to do |format|
 #      format.json { render json: @hierarchies }
       format.json { render json: [1,2,3] }
