@@ -19,10 +19,13 @@ SllBiosql::Application.routes.draw do
   resources :taxon_with_names
 
   root to: "static_pages#home"
-
+  
   get "ncbi_taxon_id2full_taxon_hierarchy" => "taxon_with_names#ncbi_taxon_id2full_taxon_hierarchy"
   get "ncbi_taxon_ids2full_taxon_hierarchies" => "taxon_with_names#ncbi_taxon_ids2full_taxon_hierarchies"
   get "organism_group_name2full_taxon_hierarchies/:name" => "taxon_with_names#organism_group_name2full_taxon_hierarchies"
+
+  # Returns a list of unique taxa in full hierarchy format, given a list of gis
+  get "gis2taxa" => "taxon_with_names#gis2taxa"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

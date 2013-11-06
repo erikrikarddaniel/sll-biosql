@@ -68,4 +68,19 @@ class TaxonWithNamesController < ApplicationController
       format.json { render json: @hierarchies }
     end
   end
+
+  # GET /gis2taxa
+  def gis2taxa
+    @protein_gis_taxons = ProteinGiTaxon.where(protein_gi: Set.new(params[:gis]))
+    ncbi_taxons = Set.new(@protein_gis_taxons.map { |p| p["taxon_id"]})
+    @taxons = TaxonWithName.where(ncbi_taxon_id: ncbi_taxons)
+    @hierarchies = []
+    @taxons.each do |taxon|
+      @hierarchies << taxon.all_up_to_root
+    end
+    respond_to do |format|
+      format.json { render json: @hierarchies }
+    end
+
+  end
 end
