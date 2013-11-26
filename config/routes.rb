@@ -1,4 +1,6 @@
 SllBiosql::Application.routes.draw do
+  get "add_gis_to_queue" => "gi_queues#add_gis_to_queue"
+
   resources :functions
   get "functional_hierarchy" => "functions#functional_hierarchy"
 

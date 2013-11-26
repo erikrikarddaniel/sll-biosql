@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131121172406) do
+ActiveRecord::Schema.define(:version => 20131121231150) do
 
   create_table "biodatabase", :primary_key => "biodatabase_id", :default => { :expr => "nextval('biodatabase_pk_seq'::regclass)" }, :force => true do |t|
     t.string "name",        :limit => 128, :null => false
@@ -190,6 +190,14 @@ ActiveRecord::Schema.define(:version => 20131121172406) do
     t.datetime "updated_at",        :null => false
     t.index ["parent_id"], :name => "fk__functions_parent_id"
     t.foreign_key ["parent_id"], "functions", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "functions_parent_id_fkey"
+  end
+
+  create_table "gi_queues", :force => true do |t|
+    t.string   "gi",                            :null => false
+    t.boolean  "fetched",    :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.index ["gi"], :name => "index_gi_queues_on_gi", :unique => true
   end
 
   create_table "seqfeature", :primary_key => "seqfeature_id", :default => { :expr => "nextval('seqfeature_pk_seq'::regclass)" }, :force => true do |t|
