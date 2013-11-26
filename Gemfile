@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', "3.2.15"
 gem 'bio'
-
+gem 'composite_primary_keys'
 # Deployment
 gem 'capistrano'
 gem 'rvm-capistrano'
