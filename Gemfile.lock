@@ -37,6 +37,9 @@ GEM
     autotest-standalone (4.5.11)
     bio (1.4.3.0001)
     builder (3.0.4)
+    byebug (2.3.1)
+      columnize (~> 0.3.6)
+      debugger-linecache (~> 1.2.0)
     capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
@@ -59,6 +62,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    columnize (0.3.6)
+    debugger-linecache (1.2.0)
     diff-lcs (1.1.3)
     erubis (2.7.0)
     execjs (2.0.2)
@@ -186,6 +191,7 @@ DEPENDENCIES
   autotest-rails-pure
   autotest-standalone
   bio
+  byebug
   capistrano
   capybara (= 1.1.2)
   coffee-rails (~> 3.2.1)
