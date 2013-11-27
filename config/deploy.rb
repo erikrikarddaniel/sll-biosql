@@ -47,6 +47,7 @@ end
 namespace :db do
   task :db_config, :except => { :no_release => true }, :role => :app do
     run "ln -s ~/dbconfigs/biosql.scilifelab.se/database.yml #{release_path}/config/database.yml"
+    run "ln -s ~/railsapps/biosql.scilifelab.se/shared/genbank_files/ #{release_path}/genbank_files"
   end
 end
 
