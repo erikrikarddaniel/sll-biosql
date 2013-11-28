@@ -24,7 +24,7 @@ describe GiQueuesController do
   # GiQueue. As you add validations to GiQueue, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    [{gi: "123"}]
+    {}
   end
   
   # This should return the minimal set of values that should be in the session
@@ -36,7 +36,7 @@ describe GiQueuesController do
   describe "GET add_gis_to_queue" do
     it "adds unprocessed gis to queue" do
       expect {
-	get :add_gis_to_queue, {:gis => valid_attributes, format: "json"}, valid_session
+	get :add_gis_to_queue, {gis:["123"],subdb: "sll_biosql", format: "json"}, valid_session
       }.to change(GiQueue, :count).by(1)
     end
   end
