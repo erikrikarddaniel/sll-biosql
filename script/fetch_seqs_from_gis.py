@@ -31,7 +31,7 @@ def fetch_gis(email,
   # GET bioentries gis that have already been imported.
   # GET gi_queues that have not been imported
   # SELECT thouse gis that are not fetched and not in bioentry
-  with psycopg2.connect("dbname='%s' user='%s' host='localhost' password='%s'" % (db_name,db_user,db_password)) as conn:
+  with psycopg2.connect("dbname='%s' host='localhost'" % (db_name)) as conn:
     with conn.cursor() as cur:
       cur.execute("""SELECT identifier FROM bioentry""")
       bioentry_ids = set(map(lambda x: x[0], cur.fetchall()))
