@@ -7,6 +7,7 @@ from BioSQL import BioSeqDatabase
 from argparse import ArgumentParser
 
 import os
+import gzip
 import psycopg2 # NEED v. 2.5 to use the "with" context manager
 import logging
 
@@ -61,7 +62,10 @@ def fetch_gis(email,
       
     fh = Entrez.efetch(db="protein", rettype="gp", retmode="text",id=list(fetch_gis))
     seqs = list(SeqIO.parse(fh, "gb"))
-    map(lambda seq: SeqIO.write(seq,os.path.join(save_file_directory,seq.annotations["gi"]+".gb"),"genbank"),seqs)
+
+    for seq in seqs:
+      f = gzip.open(os.path.join(save_file_directory,seq.annotations["gi"]+".gb.gz"), 'wb')
+      SeqIO.write(seq,f,"genbank")
     logging.info("Fetched {0} sequences from NCBI.".format(len(seqs)))
     count = db.load(seqs)
     logging.info("Inserted {0} sequences into biosql".format(count))
