@@ -18,26 +18,26 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe GiQueuesController do
+#describe GiQueuesController do
 
   # This should return the minimal set of attributes required to create a valid
   # GiQueue. As you add validations to GiQueue, be sure to
   # update the return value of this method accordingly.
-  def valid_attributes
-    {}
-  end
+#  def valid_attributes
+#    {}
+#  end
   
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # GiQueuesController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
-  describe "GET add_gis_to_queue" do
-    it "adds unprocessed gis to queue" do
-      expect {
-	get :add_gis_to_queue, {gis:["123"],subdb: "sll_biosql", format: "json"}, valid_session
-      }.to change(GiQueue, :count).by(1)
-    end
-  end
-end
+#  # This should return the minimal set of values that should be in the session
+#  # in order to pass any filters (e.g. authentication) defined in
+#  # GiQueuesController. Be sure to keep this updated too.
+#  def valid_session
+#    {}
+#  end
+#  describe "GET add_gis_to_queue" do
+#    it "adds unprocessed gis to queue" do
+#      expect {
+#	get :add_gis_to_queue, {gis:["123"],subdb: "sll_biosql", format: "json"}, valid_session
+#      }.to change(GiQueue, :count).by(1)
+#    end
+#  end
+#end
