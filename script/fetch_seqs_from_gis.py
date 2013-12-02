@@ -13,8 +13,6 @@ import logging
 
 def fetch_gis(email,
 	      db_name,
-	      db_user,
-	      db_password,
 	      tool,
 	      log_file, 
               save_file_directory):
@@ -31,7 +29,7 @@ def fetch_gis(email,
   # GET bioentries gis that have already been imported.
   # GET gi_queues that have not been imported
   # SELECT thouse gis that are not fetched and not in bioentry
-  with psycopg2.connect("dbname='%s' host='localhost'" % (db_name)) as conn:
+  with psycopg2.connect("dbname=%s" % (db_name)) as conn:
     with conn.cursor() as cur:
       cur.execute("""SELECT identifier FROM bioentry""")
       bioentry_ids = set(map(lambda x: x[0], cur.fetchall()))
@@ -48,9 +46,7 @@ def fetch_gis(email,
   # IMPORT proteins to bioentries
   # LOG which gis imported and which failed
   try:
-    server = BioSeqDatabase.open_database(driver="psycopg2", user="binni", 
-                                          passwd="", host="localhost", 
-                                          db="biosqldev")
+    server = BioSeqDatabase.open_database(driver="psycopg2", db=db_name)
     if db_name in server:
       db = server[db_name]
     else:
@@ -89,7 +85,7 @@ def fetch_gis(email,
   
   
   # UPDATE gi_queue entries that have been fetched
-  with psycopg2.connect("dbname='biosqldev' user='binni' host='localhost' password=''") as conn:
+  with psycopg2.connect("dbname=%s" % db_name) as conn:
     with conn.cursor() as cur:
       cur.execute("""UPDATE gi_queues SET fetched=true,updated_at=now() WHERE gi IN ('{0}')"""
                   .format("','".join(fetch_gis - not_fetched_gis)))
@@ -101,10 +97,6 @@ if __name__=="__main__":
 		      help="Email for NCBI web service")
   parser.add_argument("db_name", 
 		      help="Define the database name")
-  parser.add_argument("db_user", 
-		      help="Define the database user")
-  parser.add_argument("db_password", 
-		      help="Define the database user password")
   parser.add_argument("-t", "-tool", 
 		      dest="tool",
 		      help="Define the tool name for NCBI web service")
