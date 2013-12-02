@@ -1,2 +1,2 @@
 #!/bin/sh
-bundle exec autotest --rc ../.autotest
+bundle exec autotest --rc .autotest
