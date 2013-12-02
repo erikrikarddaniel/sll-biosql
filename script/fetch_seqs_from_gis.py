@@ -12,8 +12,10 @@ import psycopg2 # NEED v. 2.5 to use the "with" context manager
 import logging
 
 def fetch_gis(email,
-	      tool,
 	      db_name,
+	      db_user,
+	      db_password,
+	      tool,
 	      log_file, 
               save_file_directory):
 
@@ -29,11 +31,9 @@ def fetch_gis(email,
   # GET bioentries gis that have already been imported.
   # GET gi_queues that have not been imported
   # SELECT thouse gis that are not fetched and not in bioentry
-  with psycopg2.connect("dbname='biosqldev' user='binni' host='localhost' password=''") as conn:
+  with psycopg2.connect("dbname='%s' user='%s' host='localhost' password='%s'" % (db_name,db_user,db_password)) as conn:
     with conn.cursor() as cur:
-      cur.execute("""SELECT biodatabase_id FROM biodatabase WHERE name = %s""",(db_name,))
-      biodb_id = cur.fetchone()
-      cur.execute("""SELECT identifier FROM bioentry WHERE biodatabase_id = %s""", biodb_id)
+      cur.execute("""SELECT identifier FROM bioentry""")
       bioentry_ids = set(map(lambda x: x[0], cur.fetchall()))
       logging.info("found {0} gis in bioentry".format(len(bioentry_ids)))
       cur.execute("""SELECT gi FROM gi_queues WHERE fetched IS false""")
@@ -99,6 +99,12 @@ if __name__=="__main__":
   parser = ArgumentParser(description="Script to fetch protein sequences from NCBI with gis in gi_queue")
   parser.add_argument("email",
 		      help="Email for NCBI web service")
+  parser.add_argument("db_name", 
+		      help="Define the database name")
+  parser.add_argument("db_user", 
+		      help="Define the database user")
+  parser.add_argument("db_password", 
+		      help="Define the database user password")
   parser.add_argument("-t", "-tool", 
 		      dest="tool",
 		      help="Define the tool name for NCBI web service")
@@ -106,10 +112,6 @@ if __name__=="__main__":
 		      dest="save_file_directory",
 		      default="/tmp/",
 		      help="Define the save file directory")
-  parser.add_argument("-d", "--db_name", 
-		      dest="db_name",
-		      default="sll_biosql",
-		      help="Define database name to store NCBI entries in BioSQL")
   parser.add_argument("-l", "--log_file", 
 		      dest="log_file",
 		      default="/tmp/fetched_log",
