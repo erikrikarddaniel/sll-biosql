@@ -4,7 +4,6 @@ class GiQueuesController < ApplicationController
   # GET /add_gis_to_queue.json
   def add_gis_to_queue
     @gis = params[:gis]
-
     @gi_already_fetched = Bio::SQL::Bioentry.select(:identifier).where(identifier: @gis).map {|g| g.identifier}
     @gi_already_in_queue = GiQueue.select(:gi).where(gi: @gis).map {|g| g.gi}
 
