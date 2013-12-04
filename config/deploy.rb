@@ -3,7 +3,7 @@ require 'rvm/capistrano'
 # bundler bootstrap
 require 'bundler/capistrano'
 #Change to correct version!
-set :rvm_ruby_string, 'ruby-2.0.0-p353'
+set :rvm_ruby_string, 'ruby-2.0.0-p247'
 set :rvm_type, :system
 
 # server details
