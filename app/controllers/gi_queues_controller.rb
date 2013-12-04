@@ -8,10 +8,11 @@ class GiQueuesController < ApplicationController
     @gi_already_in_queue = GiQueue.select(:gi).where(gi: @gis).map {|g| g.gi}
 
     @gis_to_add = ( Set.new(@gis) - ( Set.new(@gi_alread_fetched) + Set.new(@gi_already_in_queue) ) ).to_a
-    
+    @gis_to_create = []
     @gis_to_add.each do |gi|
-      GiQueue.create(gi: gi)
+      @gis_to_create << GiQueue.new(gi: gi)
     end
+    GiQueue.import @gis_to_create
     respond_to do |format|
       format.json { render json: @gis_to_add }
     end
