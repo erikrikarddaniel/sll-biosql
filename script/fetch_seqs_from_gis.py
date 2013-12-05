@@ -15,6 +15,7 @@ import logging
 def fetch_gis(email,
 	      db_name,
 	      tool,
+	      batch_size,
 	      log_file, 
               save_file_directory):
 
@@ -46,8 +47,7 @@ def fetch_gis(email,
   # LOG which gis imported and which failed
   # 
   # Fetch in blocks of 1000
-  l = 1000
-  for i in xrange((len(fetch_gis)+l-1) / l):
+  for i in xrange((len(fetch_gis)+batch_size-1) / batch_size):
     try:
       server = BioSeqDatabase.open_database(driver="psycopg2", db=db_name)
       if db_name in server:
@@ -59,8 +59,8 @@ def fetch_gis(email,
       Entrez.email = email
       Entrez.tool = tool
       
-      logging.info("Fetch gis in batch of 1000. Now fetching from {0} .".format(i*l))
-      fh = Entrez.efetch(db="protein", rettype="gp", retmode="text",id=fetch_gis[i*l:(i+1)*l])
+      logging.info("Fetch gis in batch of #{0}. Now fetching from {1} .".format(batch_size,i*batch_size))
+      fh = Entrez.efetch(db="protein", rettype="gp", retmode="text",id=fetch_gis[i*batch_size:(i+1)*batch_size])
       sleep(0.5)
       seqs = list(SeqIO.parse(fh, "gb"))
 
@@ -74,27 +74,26 @@ def fetch_gis(email,
       if count != len(fetch_gis):
         logging.warn("Not equally many gis to fetch as were inserted")
       not_fetched_gis = set()
-      for i in list(fetch_gis):
+      for i in fetch_gis[i*batch_size:(i+1)*batch_size]:
         try:
           entry = db.lookup(gi=i)
-          logging.info("Gi: {0} inserted in database".format(i))
         except IndexError as e:
           logging.warn("Gi: {0} not inserted in database".format(i))
           not_fetched_gis.add(i)
       server.commit()
     except Exception as e:
-      print "Error: {0}".format(e)
+      logging.error("Error: {0}".format(e))
     finally:
       fh.close()
       server.close()
 
-    # UPDATE gi_queue entries that have been fetched
-    with psycopg2.connect("dbname=%s" % db_name) as conn:
-      with conn.cursor() as cur:
-        cur.execute("""UPDATE gi_queues SET fetched=true,updated_at=now() WHERE gi IN ('{0}')"""
-                    .format("','".join(set(fetch_gis) - not_fetched_gis)))
-        logging.info("Updated status of {0} gi_queues rows out of {1} gis that were added to bioentry"
-                     .format(cur.rowcount,count))
+      # UPDATE gi_queue entries that have been fetched
+      with psycopg2.connect("dbname=%s" % db_name) as conn:
+        with conn.cursor() as cur:
+          cur.execute("""UPDATE gi_queues SET fetched=true,updated_at=now() WHERE gi IN ('{0}')"""
+                      .format("','".join(set(fetch_gis) - not_fetched_gis)))
+          logging.info("Updated status of {0} gi_queues rows out of {1} gis that were added to bioentry"
+                       .format(cur.rowcount,count))
 
 
 if __name__=="__main__":
@@ -114,6 +113,11 @@ if __name__=="__main__":
 	          dest="log_file",
 	          default="/tmp/fetched_log",
 	          help="Define the log_file")
+  parser.add_argument("-b", "--batch_size", 
+	          dest="batch_size",
+	          default=200,
+		  type=int,
+	          help="Define how many proteins to fetch from NCBI in a batch")
   args = parser.parse_args()
 
   fetch_gis(**vars(args))
