@@ -18,6 +18,20 @@ class GiQueuesController < ApplicationController
     end
   end
 
+  def get_gis_sequences
+    
+    @gis = params[:gis]
+    fasta = Hash.new
+    entries = Bio::SQL::Bioentry.where(identifier: @gis)
+    entries.each do |entry|
+      sequence = Bio::SQL.fetch_accession(entry.accession)
+      fasta << {gi: sequence.identifier, seq: sequence.seq}
+    end
+    respond_to do |format|
+      format.json { render json: fasta}
+    end
+  end
+  
   def get_gis_sequences_fasta
     @gis = params[:gis]
     fasta = []
@@ -28,6 +42,7 @@ class GiQueuesController < ApplicationController
     end
     send_data(ActiveSupport::Gzip.compress(fasta.join("")), filename: "pfitmap.fasta.gz") 
   end
+  
   def get_gis_sequences_gb
    @gis = params[:gis]
    gb = []
