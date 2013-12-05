@@ -83,7 +83,7 @@ def fetch_gis(email,
           not_fetched_gis.add(i)
       server.commit()
     except Exception as e:
-      tb = traceback.format_exec()
+      tb = traceback.format_exc()
       logging.error("Error: {0}\nTraceback: {1}".format(e,tb))
     finally:
       fh.close()
