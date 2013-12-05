@@ -7,6 +7,7 @@ from BioSQL import BioSeqDatabase
 from argparse import ArgumentParser
 from time import sleep
 
+import traceback
 import os
 import gzip
 import psycopg2 # NEED v. 2.5 to use the "with" context manager
@@ -82,7 +83,8 @@ def fetch_gis(email,
           not_fetched_gis.add(i)
       server.commit()
     except Exception as e:
-      logging.error("Error: {0}".format(e))
+      tb = traceback.format_exec()
+      logging.error("Error: {0}\nTraceback: {1}".format(e,tb))
     finally:
       fh.close()
       server.close()
