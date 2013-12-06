@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+# Fetch from NCBI those GI values that have been put in
+# the queue in sll-biosql.
+# NOTE: Biopython is currently installed with a patch to fix a
+#       parsing error due to bond features. The hope is  that
+#       this patch will be included in Biopython 1.64
+#       See: http://lists.open-bio.org/pipermail/biopython-dev/2013-December/010993.html
 from Bio import Entrez
 from Bio import SeqIO
 from BioSQL import BioSeqDatabase
