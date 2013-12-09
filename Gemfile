@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', "3.2.15"
-gem 'bio'
+gem 'bio', git: 'https://github.com/binnisb/bioruby.git' 
 gem 'composite_primary_keys'
 # Batch import 
 gem 'activerecord-import', '0.3.1'

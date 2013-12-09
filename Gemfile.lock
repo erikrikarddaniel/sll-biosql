@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/binnisb/bioruby.git
+  revision: 22665b0901ac0bb0b6b129b1a7420d91afa3df46
+  specs:
+    bio (1.4.3.5000)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -37,7 +43,6 @@ GEM
     arel (3.0.3)
     autotest-rails-pure (4.1.2)
     autotest-standalone (4.5.11)
-    bio (1.4.3.0001)
     builder (3.0.4)
     byebug (2.4.0)
       columnize (~> 0.3.6)
@@ -195,7 +200,7 @@ DEPENDENCIES
   annotate (~> 2.4.1.beta)
   autotest-rails-pure
   autotest-standalone
-  bio
+  bio!
   byebug
   capistrano
   capybara (= 1.1.2)
