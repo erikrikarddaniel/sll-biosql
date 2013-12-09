@@ -15,47 +15,24 @@ class GiQueuesController < ApplicationController
     GiQueue.import @gis_to_create
     respond_to do |format|
       format.json { render json: @gis_to_add }
+      format.all { render_404 }
     end
   end
 
   def get_gis_sequences
     
     @gis = params[:gis]
-    fasta = Hash.new
+    seqs = []
     entries = Bio::SQL::Bioentry.where(identifier: @gis)
     entries.each do |entry|
       sequence = Bio::SQL.fetch_accession(entry.accession)
-      fasta << {gi: sequence.identifier, seq: sequence.seq}
+      seqs << sequence
     end
     respond_to do |format|
-      format.json { render json: fasta}
+      format.json { render json: seqs.map{|seq| {gi: seq.identifier, seq: seq.seq}} }
+      format.gb { send_data(seqs.map{|seq| seq.to_biosequence.output(:genbank)}.join(""), filename: "pfitmap.gb") }
+      format.fasta {  send_data(seqs.map{|seq| seq.to_biosequence.to_fasta("gi|#{seq.identifier}|#{seq.entry.bioentry_qualifier_values.where(term_id: 36).first.value}|#{seq.name}.#{seq.version}|#{seq.description}",60)}.join(""), filename: "pfitmap.fasta") }
+      format.all { render_404  }
     end
-  end
-  
-  def get_gis_sequences_fasta
-    @gis = params[:gis]
-    fasta = []
-    entries = Bio::SQL::Bioentry.where(identifier: @gis)
-    entries.each do |entry|
-      sequence = Bio::SQL.fetch_accession(entry.accession)
-      fasta << sequence.to_biosequence.to_fasta("gi|#{sequence.identifier}|#{sequence.entry.bioentry_qualifier_values.where(term_id: 36).first.value}|#{sequence.name}.#{sequence.version}|#{sequence.description}",60)
-    end
-    send_data(ActiveSupport::Gzip.compress(fasta.join("")), filename: "pfitmap.fasta.gz") 
-  end
-  
-  def get_gis_sequences_gb
-   @gis = params[:gis]
-   gb = []
-   not_found = []
-   @gis.each do |g|
-    f = GB_FILES+g+".gb.gz"
-    if File.exists? f
-      gb << ActiveSupport::Gzip.decompress(IO.read(f))
-    else
-      Rails.logger.warn "GI #{g} not found in gb"
-    end
-   end
-
-   send_data(ActiveSupport::Gzip.compress(gb.join("")), filename: "pfitmap.gb.gz") 
   end
 end
