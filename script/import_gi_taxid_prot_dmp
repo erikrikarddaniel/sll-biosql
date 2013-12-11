@@ -97,13 +97,14 @@ def _partfile(partnum)
   File.open(@tmpfile, "w")
 end
 
-def _handle_parttable(partnum, nextlimit)
+def _handle_parttable(partnum, firstgi, lastgi)
   ptable = sprintf("#{@options[:base_table]}_part%05d", partnum)
   warn "Creating partition table #{ptable}" if @options[:verbose]
   _call_psql(<<-SQL)
     DROP INDEX IF EXISTS #{ptable}_i00;
-    CREATE TABLE IF NOT EXISTS #{ptable} (
-      CHECK ( protein_gi > #{nextlimit - @options[:partition_size]} AND protein_gi <= #{nextlimit} )
+    DROP TABLE IF EXISTS #{ptable};
+    CREATE TABLE #{ptable} (
+      CHECK ( protein_gi > #{firstgi} AND protein_gi <= #{lastgi} )
     )
     INHERITS ( #{@options[:base_table]} );
     TRUNCATE TABLE #{ptable};
@@ -131,27 +132,27 @@ _call_psql(<<-SQL)
 SQL
 
 # 2. Loop and create partition tables with indexes
-nextlimit = @options[:partition_size]
 partnum = 0
 partfile = _partfile(partnum)
 lastgi = nil
+firstgi = 0
 IO.popen("gunzip -c #{@infile} | sort -n").each_with_index do |line, i|
   gi = line.split("\t")[0].to_i
   
-  next if gi == lastgi
-
-  lastgi = gi
-
-  if gi > nextlimit
+  if i > 0 and i % @options[:partition_size] == 0
     partfile.close
-    _handle_parttable(partnum, nextlimit)
-    nextlimit += @options[:partition_size]
+    _handle_parttable(partnum, firstgi, gi)
+    firstgi = lastgi
     partnum += 1
     partfile = _partfile(partnum)
   end
+
+  next if gi == lastgi
+
+  lastgi = gi
   
   partfile.print line
 end
 
 partfile.close
-_handle_parttable(partnum, nextlimit)
+_handle_parttable(partnum, firstgi, lastgi)
