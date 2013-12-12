@@ -77,14 +77,12 @@ rescue OptionParser::InvalidOption, OptionParser::MissingArgument
   exit 1
 end
  
-def _call_psql(sql, fname = nil, verb = false)
+def _call_psql(sql, fname = nil)
   psqlcall = "psql -d #{@options[:db]} -c '#{sql}'"
   psqlcall += " < #{fname}" if fname
   if @options[:dryrun]
     puts "DRY RUN: psql call: #{psqlcall}"
   else
-    #warn "Calling #{psqlcall}" if @options[:verbose]
-    warn "Calling #{psqlcall}" if verb
     unless system(psqlcall)
       warn "Failed to call #{psqlcall}"
       exit 2
@@ -109,7 +107,7 @@ def _handle_parttable(partnum, firstgi, lastgi)
     INHERITS ( #{@options[:base_table]} );
     TRUNCATE TABLE #{ptable};
   SQL
-  _call_psql(<<-SQL, @tmpfile, true)
+  _call_psql(<<-SQL, @tmpfile)
     COPY #{ptable} FROM STDIN;
   SQL
   _call_psql(<<-SQL)
