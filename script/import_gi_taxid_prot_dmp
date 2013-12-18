@@ -1,0 +1,156 @@
+#!/usr/bin/env ruby
+#
+# = NAME
+#
+# import_gi_taxid_prot_dmp
+#
+# = SYNOPSIS
+#
+# See below, in opt parser block.
+#
+# = USAGE
+#
+# See below, in opt parser block.
+#
+# = AUTHOR
+#
+# daniel.lundin@scilifelab.se
+
+$VERBOSE = true
+
+require 'optparse'
+
+@options = {
+  base_table: 'protein_gi_taxons',
+  dryrun: false,
+  partition_size: 1000000,
+  workdir: '/tmp'
+}
+opt_parser = OptionParser.new do |opts|
+  opts.banner = <<BANNER
+import_gi_taxid_prot_dmp: Reads an NCBI gi_taxid_prot.dmp.gz file and replaces 
+  old rows in a database with its content
+    import_gi_taxid_prot_dmp [options] file.gz
+BANNER
+
+  opts.on "--base_table=STRING", "Name of table to inherit from, default #{@options[:base_table]}" do |v|
+    @options[:base_table] = v
+  end
+
+  opts.on "--db=STRING", "Database to connect to (same user as UNIX user)" do |v|
+    @options[:db] = v
+  end
+
+  opts.on "--[no-]dryrun", "Just do a dry run, echoing commands sent to psql, default #{@options[:dryrun]}" do |v|
+    @options[:dryrun] = v
+  end
+
+  opts.on "-h", "--help", "This info"  do
+    puts opts
+    exit 0
+  end
+
+  opts.on "--partition_size=INTEGER", "Number of records per partition, default #{@options[:partition_size]}" do |v|
+    @options[:partition_size] = v.to_i
+  end
+
+  opts.on "-v", "--verbose", "Be verbose"  do |v| 
+    @options[:verbose] = v 
+  end
+
+  opts.on "--workdir=STRING", "Directory to write temporary files to, default #{@options[:workdir]}" do |v|
+    @options[:workdir] = v.to_i
+  end
+end
+begin
+  opt_parser.parse!
+  mandatory = [ :base_table, :partition_size ]
+  missing = mandatory.select { |param| @options[param].nil? }
+  unless missing.empty?
+    warn "Missing options: #{missing.map { |m| "--#{m}" }.join(", ")}"
+    warn opt_parser
+    exit 1
+  end
+rescue OptionParser::InvalidOption, OptionParser::MissingArgument
+  warn "#{$!}"
+  warn opt_parser
+  exit 1
+end
+ 
+def _call_psql(sql, fname = nil)
+  psqlcall = "psql -d #{@options[:db]} -c '#{sql}'"
+  psqlcall += " < #{fname}" if fname
+  if @options[:dryrun]
+    puts "DRY RUN: psql call: #{psqlcall}"
+  else
+    unless system(psqlcall)
+      warn "Failed to call #{psqlcall}"
+      exit 2
+    end
+  end
+end
+
+def _partfile(partnum)
+  warn "Opening #{@tmpfile} for partition #{partnum}" if @options[:verbose]
+  File.open(@tmpfile, "w")
+end
+
+def _handle_parttable(partnum, firstgi, lastgi)
+  ptable = sprintf("#{@options[:base_table]}_part%05d", partnum)
+  warn "Creating partition table #{ptable}" if @options[:verbose]
+  _call_psql(<<-SQL)
+    DROP INDEX IF EXISTS #{ptable}_i00;
+    DROP TABLE IF EXISTS #{ptable};
+    CREATE TABLE #{ptable} (
+      CHECK ( protein_gi > #{firstgi} AND protein_gi <= #{lastgi} )
+    )
+    INHERITS ( #{@options[:base_table]} );
+    TRUNCATE TABLE #{ptable};
+  SQL
+  _call_psql(<<-SQL, @tmpfile)
+    COPY #{ptable} FROM STDIN;
+  SQL
+  _call_psql(<<-SQL)
+    CREATE UNIQUE INDEX #{ptable}_i00 ON #{ptable} ( protein_gi );
+  SQL
+end
+
+@infile = ARGV.shift
+@tmpfile = "#{@options[:workdir]}/#{File.basename(@infile, '.gz')}"
+
+unless @infile and File.exists?(@infile) then
+  warn "You must provide an existing infile"
+  exit 2
+end
+
+
+# 1. Truncate base table
+_call_psql(<<-SQL)
+  TRUNCATE TABLE #{@options[:base_table]}
+SQL
+
+# 2. Loop and create partition tables with indexes
+partnum = 0
+partfile = _partfile(partnum)
+lastgi = nil
+firstgi = 0
+IO.popen("gunzip -c #{@infile} | sort -n").each_with_index do |line, i|
+  gi = line.split("\t")[0].to_i
+  
+  if i > 0 and i % @options[:partition_size] == 0
+    partfile.close
+    _handle_parttable(partnum, firstgi, gi)
+    firstgi = lastgi
+    partnum += 1
+    partfile = _partfile(partnum)
+  end
+
+  next if gi == lastgi
+
+  lastgi = gi
+  
+  partfile.print line
+end
+
+partfile.close
+_handle_parttable(partnum, firstgi, lastgi)
