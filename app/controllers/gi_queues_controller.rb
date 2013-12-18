@@ -21,11 +21,10 @@ class GiQueuesController < ApplicationController
 
   def get_gis_sequences
     
-    @gis = params[:gis]
+    @accessions = params[:accessions]
     seqs = []
-    entries = Bio::SQL::Bioentry.where(identifier: @gis)
-    entries.each do |entry|
-      sequence = Bio::SQL.fetch_accession(entry.accession)
+    @accessions.split(",").each do |accession|
+      sequence = Bio::SQL.fetch_accession(accession)
       seqs << sequence
     end
     respond_to do |format|
