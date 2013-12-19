@@ -28,7 +28,7 @@ class GiQueuesController < ApplicationController
       acc,ver = accession.split(".")
       # Here the Bioentry query will get a specific version if the accession had a .V part. Othervise it will fetch all and use last version
       sequence = Bio::SQL::Sequence.new(entry:  Bio::SQL::Bioentry.where(accession: acc).where("version = ? OR ? IS NULL",ver,ver).order(:version).last)
-      seqs << sequence
+      sequence ? seqs << sequence : nil
     end
     respond_to do |format|
       format.json { render json: seqs.map{|seq| {gi: seq.identifier, seq: seq.seq}} }
