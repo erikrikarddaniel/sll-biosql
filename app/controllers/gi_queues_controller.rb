@@ -22,15 +22,14 @@ class GiQueuesController < ApplicationController
   def get_gis_sequences
     @accessions = params[:accessions]
     seqs = []
-
     @accessions.split(",").each do |accession|
       # If accession is AAAA.V we create acc = AAAA ver = V
       # If accession is AAAA   we create acc = AAAA ver = nil
       acc,ver = accession.split(".")
       # Here the Bioentry query will get a specific version if the accession had a .V part. Othervise it will fetch all and use last version
       sequence = Bio::SQL::Sequence.new(entry:  Bio::SQL::Bioentry.where(accession: acc).where("version = ? OR ? IS NULL",ver,ver).order(:version).last)
+      # If the bioentry for a given accession not found, skip adding it to the sequence list
       sequence.entry ? seqs << sequence : nil
-      logger.warn "Sequence: #{sequence.entry}, seqs.lengt: #{seqs.length}"
     end
     respond_to do |format|
       format.json { render json: seqs.map{|seq| {gi: seq.identifier, seq: seq.seq}} }
