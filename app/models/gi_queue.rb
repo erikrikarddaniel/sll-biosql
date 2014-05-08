@@ -12,6 +12,5 @@
 class GiQueue < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessible :gi, :fetched
-  set_primary_key "id"
-
+  self.primary_key = 'id'
 end
