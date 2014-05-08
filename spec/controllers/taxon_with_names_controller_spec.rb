@@ -40,10 +40,21 @@ describe TaxonWithNamesController do
       entries_second[3]['scientific_name'].should == 'Homininae'
     end
   end
+
   describe "GET ncbi_taxon_id2full_taxon_hierarchy from name" do
     it "returns a json representation of a taxons full hierarchy" do
       get :ncbi_taxon_id2full_taxon_hierarchy, { name: 'Escherichia coli O157:H7', format: 'json' }, valid_session
       response.should be_success
+    end
+  end
+
+  describe "GET gis_to_taxa from list of protein gis" do
+    it "returns a json representation of all taxa" do
+      get :gis2taxa, { gis: [ 37544404, 254791767 ], format: 'json' }, valid_session
+      response.should be_success
+      entries = JSON.parse(response.body)
+      entries[0][0]['scientific_name'].should == 'Escherichia coli O157:H7 str. TW14359'
+      entries[1][0]['scientific_name'].should == 'Homo sapiens'
     end
   end
 end
