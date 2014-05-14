@@ -10,7 +10,7 @@ set :rvm_type, :system
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 set :deploy_to, "/home/passenger/railsapps/biosql.scilifelab.se"
-set :deploy_via, :remote_cache
+#set :deploy_via, :remote_cache
 set :user, "passenger"
 set :use_sudo, false
 set :port, 50020 #specify a specific ssh port on the app.example.org
