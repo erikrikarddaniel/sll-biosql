@@ -8,7 +8,7 @@ set :rvm_type, :system
 
 # server details
 default_run_options[:pty] = true
-#ssh_options[:forward_agent] = true
+ssh_options[:forward_agent] = true
 set :deploy_to, "/home/passenger/railsapps/biosql.scilifelab.se"
 set :deploy_via, :remote_cache
 set :user, "passenger"
