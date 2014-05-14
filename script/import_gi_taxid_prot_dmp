@@ -113,6 +113,7 @@ def _handle_parttable(partnum, firstgi, lastgi)
   _call_psql(<<-SQL)
     CREATE UNIQUE INDEX #{ptable}_i00 ON #{ptable} ( protein_gi );
   SQL
+  warn "Done." if @options[:verbose]
 end
 
 @infile = ARGV.shift
@@ -125,15 +126,18 @@ end
 
 
 # 1. Truncate base table
+warn "Truncating #{@options[:base_table]}" if @options[:verbose]
 _call_psql(<<-SQL)
   TRUNCATE TABLE #{@options[:base_table]}
 SQL
+warn "Done." if @options[:verbose]
 
 # 2. Loop and create partition tables with indexes
 partnum = 0
 partfile = _partfile(partnum)
 lastgi = nil
 firstgi = 0
+warn "Creating partitioned tables..." if @options[:verbose]
 IO.popen("gunzip -c #{@infile} | sort -n").each_with_index do |line, i|
   gi = line.split("\t")[0].to_i
   
@@ -151,6 +155,7 @@ IO.popen("gunzip -c #{@infile} | sort -n").each_with_index do |line, i|
   
   partfile.print line
 end
+warn "Done." if @options[:verbose]
 
 partfile.close
 _handle_parttable(partnum, firstgi, lastgi)
