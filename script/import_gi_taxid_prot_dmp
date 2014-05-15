@@ -83,7 +83,7 @@ rescue OptionParser::InvalidOption, OptionParser::MissingArgument
 end
  
 def _call_psql(sql, fname = nil)
-  psqlcall = "psql -d #{@options[:db]} -c '#{sql}'"
+  psqlcall = "psql #{@options[:dbuser]} -d #{@options[:db]} -c '#{sql}'"
   psqlcall += " < #{fname}" if fname
   if @options[:dryrun]
     puts "DRY RUN: psql call: #{psqlcall}"
