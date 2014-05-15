@@ -22,6 +22,7 @@ require 'optparse'
 
 @options = {
   base_table: 'protein_gi_taxons',
+  dbuser: '',
   dryrun: false,
   partition_size: 1000000,
   workdir: '/tmp'
@@ -37,8 +38,12 @@ BANNER
     @options[:base_table] = v
   end
 
-  opts.on "--db=STRING", "Database to connect to (same user as UNIX user)" do |v|
+  opts.on "--db=STRING", "Database to connect to (default as UNIX user, but see --dbuser)" do |v|
     @options[:db] = v
+  end
+
+  opts.on "--dbuser=STRING", "Database user to connect as" do |v|
+    @options[:dbuser] = "-U #{v}"
   end
 
   opts.on "--[no-]dryrun", "Just do a dry run, echoing commands sent to psql, default #{@options[:dryrun]}" do |v|
