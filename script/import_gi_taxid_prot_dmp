@@ -107,9 +107,11 @@ def _handle_parttable(partnum, firstgi, lastgi)
     INHERITS ( #{@options[:base_table]} );
     TRUNCATE TABLE #{ptable};
   SQL
+  warn "\tCopying data to #{ptable}" if @options[:verbose]
   _call_psql(<<-SQL, @tmpfile)
     COPY #{ptable} FROM STDIN;
   SQL
+  warn "\tCreating index on #{ptable} ( protein_gi )" if @options[:verbose]
   _call_psql(<<-SQL)
     CREATE UNIQUE INDEX #{ptable}_i00 ON #{ptable} ( protein_gi );
   SQL
